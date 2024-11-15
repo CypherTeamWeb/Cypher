@@ -2,7 +2,7 @@
     {
         "title": "Cyberpunk 2077",
         "price": 59.99,
-        "ImageUrl" : "src/assets/photo-1542751371-adc38448a05e.avif",
+        "ImageUrl" : "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800",
         "company": "CD Projekt Red",
         "sale": [true, 74.99],
         "proccentSale": [true, -20]
@@ -10,7 +10,7 @@
     {
         "title": "Elden Ring",
         "price": 69.99,
-        "ImageUrl" : "src/assets/keyboard-card.avif",
+        "ImageUrl" : "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=800",
         "company": "FromSoftware",
         "sale": [false],
         "proccentSale": [false]
@@ -18,7 +18,7 @@
     {
         "title": "Red Dead Redemption 2",
         "price": 49.99,
-        "ImageUrl" : "src/assets/plaing-card.avif",
+        "ImageUrl" : "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?auto=format&fit=crop&w=800",
         "company": "Rockstar Games",
         "sale": [true, 74.61],
         "proccentSale": [true, -33]
