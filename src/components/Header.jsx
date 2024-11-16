@@ -24,6 +24,7 @@ export default function Header(){
     const [WishListOpen, setWishListOpen] = useState(false);
     const [SettingsOpen, setSettingsOpen] = useState(false);
     const [SectionsOpen, setSectionsOpen] = useState('');
+    const [menuOpen, setMenuOpen] = useState(false)
 
     const item = useSelector((state) => state.items.value);
     const WishlistItems = useSelector((state) => state.items.wishlist);
@@ -74,12 +75,17 @@ export default function Header(){
         <>
             <div className="header">
               <Link className="toHome" to={'/'}>CypherTeam</Link>
-              <div className="navigation">
-                <a href="#" >{lang === 'Русский' ? 'Магазин' : 'Store'}</a>
-                <a href="#">{lang === 'Русский' ? 'Библиотека' :'Library'}</a>
-                <a href="#">{lang === 'Русский' ? 'Сообщество' : 'Community'}</a>
+              <div className="navigation" style={{display: menuOpen && 'flex', flexDirection: menuOpen ? 'column' : 'row', marginTop: menuOpen && '70px'}}>
+                <a href="#" style={{transform: menuOpen ? 'translate(100px,50px)' : ''}}>{lang === 'Русский' ? 'Магазин' : 'Store'}</a>
+                <a href="#" style={{transform: menuOpen ? 'translate(100px,20px)' : ''}}>{lang === 'Русский' ? 'Библиотека' :'Library'}</a>
+                <a href="#" style={{transform: menuOpen ? 'translate(100px,-10px)' : ''}}>{lang === 'Русский' ? 'Сообщество' : 'Community'}</a>
               </div>
 
+              <div className="menu-wrapper" onClick={() => setMenuOpen(!menuOpen)}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="menu" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+                </svg>
+              </div>
               <div className="input-wrapper"> 
                 <input type="text" className="input" placeholder={lang === 'Русский' ? 'Поиск игр...' :"Search games..."} onChange={(e) => dispatch(valueSet(e.target.value))} />
                 {!value && <svg className="input-svg" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8C939F"
@@ -88,13 +94,13 @@ export default function Header(){
                 </svg>}
               </div>
 
-                <div className="Cart" onClick={() => {serCartOpen(!CartOpen); setUserOpen(false); setWishListOpen(false)}}>
+                <div className="Cart" style={{display: menuOpen && 'block', marginTop: menuOpen && '30px', transform: menuOpen ? 'translate(-50px)' : ''}} onClick={() => {serCartOpen(!CartOpen); setUserOpen(false); setWishListOpen(false)}}>
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                       stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" ><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1">
                     </circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg>
                     {item.length ? <div className="count">{item.length}</div> : null}
                 </div>
-                <div className="User" onClick={UserOnClick}>
+                <div className="User" style={{display: menuOpen && 'block',marginTop: menuOpen && '-70px',transform: menuOpen ? 'translate(-75px)' : ''}} onClick={UserOnClick}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" 
                     stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                 </div>
@@ -131,7 +137,7 @@ export default function Header(){
           }
 
           {UserOpen ? 
-            <div className="UserOpen" style={{display: WishListOpen ? 'none' : 'block', overflowY: SettingsOpen ? 'auto' : 'none', color: 'red'}}>
+            <div className="UserOpen" style={{display: WishListOpen ? 'none' : 'block', marginTop: menuOpen && '100px',  overflowY: SettingsOpen ? 'auto' : 'none', color: 'red'}}>
               
                 <div className="top-section" style={{display: SettingsOpen ? 'none' : 'block'}}>
                     <UserTopSection />
