@@ -22,7 +22,7 @@ export default function Header(){
     const [WishListOpen, setWishListOpen] = useState(false);
     const [SettingsOpen, setSettingsOpen] = useState(false);
     const [SectionsOpen, setSectionsOpen] = useState('');
-    const [menuOpen, setMenuOpen] = useState(false)
+    const [menuOpen, setMenuOpen] = useState(false);
 
     const item = useSelector((state) => state.items.value);
     const WishlistItems = useSelector((state) => state.items.wishlist);
