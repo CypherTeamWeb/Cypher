@@ -1,1 +1,3 @@
-/api/* /.netlify/functions/ /WorkTogether
+[[redirects]]
+  from = "/"
+  to = "/WorkTogether"
