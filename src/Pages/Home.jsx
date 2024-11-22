@@ -44,16 +44,18 @@ export default function Home() {
                         </div>
                       }
                       
-                      <div className="cards">
-                          {GamesJson
-                            .filter((obj) => obj.title.toLowerCase().includes(value.toLowerCase()))
-                            .map((obj, index) => (
-                              <>
-                                  <Card key={index} title={obj.title} price={obj.price} imageUrl={obj.ImageUrl} company={obj.company} 
-                                  sale={obj.sale} proccentSale={obj.proccentSale}/>
-                              </>
-                            ))
-                          }
+                      <div className="card-wrapper">
+                        <div className="cards" style={{justifyContent: value ? '' : 'center', marginLeft: value ? '150px' : '0'}}>
+                            {GamesJson
+                              .filter((obj) => obj.title.toLowerCase().includes(value.toLowerCase()))
+                              .map((obj, index) => (
+                                <>
+                                    <Card key={index} title={obj.title} price={obj.price} imageUrl={obj.ImageUrl} company={obj.company} 
+                                    sale={obj.sale} proccentSale={obj.proccentSale}/>
+                                </>
+                              ))
+                            }
+                        </div>
                       </div>
                     </div>  
                   </div>

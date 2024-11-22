@@ -1,4 +1,9 @@
+import { useSelector } from "react-redux"
+
 export default function UserTopSection(){
+    const name = useSelector((state) => state.setting.name);
+    const email = useSelector((state) => state.setting.email);
+
     return (
         <>
             <div className="logo">
@@ -7,7 +12,7 @@ export default function UserTopSection(){
                     <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle>
                 </svg>
             </div>
-            <div className="name">Guest User</div><p className="gmail">guest@example.com</p>
+            <div className="name">{name}</div><p className="gmail">{email}</p>
         </>
     )
 }

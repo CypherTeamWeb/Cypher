@@ -15,8 +15,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import {itemsSet, wishlistSet} from '../redux/slices/itemsSlice'
 import { valueSet } from "../redux/slices/valueSlice";
 
-// сарян за грязный код
-
 export default function Header(){
     const [CartOpen, serCartOpen] = useState(false);
     const [price, setPrice] = useState(0);
@@ -76,9 +74,12 @@ export default function Header(){
             <div className="header">
               <Link className="toHome" to={'/'}>CypherTeam</Link>
               <div className="navigation" style={{display: menuOpen && 'flex', flexDirection: menuOpen ? 'column' : 'row', marginTop: menuOpen && '70px'}}>
-                <a href="#" style={{transform: menuOpen ? 'translate(100px,50px)' : ''}}>{lang === 'Русский' ? 'Магазин' : 'Store'}</a>
-                <a href="#" style={{transform: menuOpen ? 'translate(100px,20px)' : ''}}>{lang === 'Русский' ? 'Библиотека' :'Library'}</a>
-                <a href="#" style={{transform: menuOpen ? 'translate(100px,-10px)' : ''}}>{lang === 'Русский' ? 'Сообщество' : 'Community'}</a>
+                <a href="#" style={{transform: menuOpen ? 'translate(100px,50px)' : ''}}
+                >{lang === 'Русский' ? 'Магазин' : 'Store'}</a>
+                <a href="#" style={{transform: menuOpen ? 'translate(100px,20px)' : ''}}>
+                  {lang === 'Русский' ? 'Библиотека' :'Library'}</a>
+                <a href="/WorkTogether" style={{transform: menuOpen ? 'translate(100px,-10px)' : ''}}>
+                  {lang === 'Русский' ? 'Хотите присоединиться к нашей команде?' : 'Wanna work together?'}</a>
               </div>
 
               <div className="menu-wrapper" onClick={() => setMenuOpen(!menuOpen)}>
