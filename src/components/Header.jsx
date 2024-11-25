@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {Link} from "react-router-dom";
 import axios from "axios";
 import CardInCart from "./CardInCart";
@@ -9,6 +9,7 @@ import UserTopSection from './UserTopSection'
 import CardInWishList from "./CardInWishList";
 import {SettingsSections} from '../Configs/Settings'
 import SectionsOpenpage from "./SectionsOpen";
+import debounce from 'lodash.debounce'
 
 // redux import
 import {useDispatch, useSelector} from 'react-redux';
@@ -23,6 +24,7 @@ export default function Header(){
     const [SettingsOpen, setSettingsOpen] = useState(false);
     const [SectionsOpen, setSectionsOpen] = useState('');
     const [menuOpen, setMenuOpen] = useState(false);
+    const [SearchValue, setSearchValue] = useState('');
 
     const item = useSelector((state) => state.items.value);
     const WishlistItems = useSelector((state) => state.items.wishlist);
@@ -30,6 +32,13 @@ export default function Header(){
     const lang = useSelector((state) => state.setting.value);
 
     const dispatch = useDispatch();
+
+    const inputDebounce = useCallback(
+      debounce((e) => {
+        dispatch(valueSet(e));
+      }, 300),
+      []
+    )
 
    useEffect(() => {
       axios.get('https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/CypherCartJson').then((res) => {
@@ -69,6 +78,11 @@ export default function Header(){
         setSectionsOpen(title);
     }
 
+    const inputOnChange = (e) => {
+        setSearchValue(e.target.value);
+        inputDebounce(e.target.value)
+    }
+
     return (
         <>
             <div className="header">
@@ -88,8 +102,8 @@ export default function Header(){
                 </svg>
               </div>
               <div className="input-wrapper"> 
-                <input type="text" className="input" placeholder={lang === 'Русский' ? 'Поиск игр...' :"Search games..."} onChange={(e) => dispatch(valueSet(e.target.value))} />
-                {!value && <svg className="input-svg" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8C939F"
+                <input type="text" className="input" value={SearchValue} onChange={inputOnChange} placeholder={lang === 'Русский' ? 'Поиск игр...' :"Search games..."}  />
+                {!SearchValue && <svg className="input-svg" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8C939F"
                     strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                    <circle cx="11" cy="11" r="8" ></circle><path d="m21 21-4.3-4.3"></path>
                 </svg>}
