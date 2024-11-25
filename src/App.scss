@@ -49,6 +49,10 @@ html{
         @media screen and (max-width: 605px) {
             margin-left: 100px;
         }
+
+        @media screen and (max-width: 375px) {
+            margin-left: 10px;
+        }
     }
 
     .navigation{
@@ -68,16 +72,22 @@ html{
         }
 
         @media screen and (max-width: 465px) {
-            margin-left: 240px;
+            margin-left: 90px;
         }
 
         @media screen and (max-width: 615px) {
             display: none;
+            margin-left: 40%;
         }
 
         @media screen and (min-width: 715px) {
             display: block;
         }
+
+        @media screen and (max-width: 375px) {
+            margin-left: 60px;
+        }
+
         a{
             text-decoration: none;
             color: #ddd;
@@ -177,11 +187,20 @@ html{
 
         @media screen and (max-width: 615px) {
             display: none;
+            margin-left: 380px
+        }
+
+        @media screen and (max-width: 375px) {
+            margin-left: 240px;
         }
 
         &:hover{
             background-color: rgb(31 41 55);
             opacity: 0.7;
+        }
+
+        @media screen and (max-width: 375px) {
+            margin-left: 200px;
         }
     }
     
@@ -197,12 +216,19 @@ html{
         line-height: 40px;
         animation: bounse  1s;
 
+        @media screen and (max-width: 495px) {
+            margin-left: 200px;
+        }
+
         @media screen and (min-width: 715px) {
             display: block !important;
         }
 
         @media screen and (max-width: 615px) {
             display: none;
+           &{
+                margin-left: 400px !important;
+           }
         }
 
         @media screen and (max-width: 1150px) {
@@ -215,6 +241,10 @@ html{
             &{
                 margin-left: 94%;
             }
+        }
+
+        @media screen and (max-width: 375px) {
+            margin-left: 225px !important;
         }
 
         &:hover{
@@ -919,6 +949,10 @@ main{
                margin-left: 50px;
             }
         }
+
+        @media screen and (max-width: 375px) {
+            margin-left: 20px;
+        }
         span{
             color: rgb(59 130 246);
             position: absolute;
@@ -952,6 +986,9 @@ main{
                 &{
                     width: 400px;
                 }
+            }
+            @media screen and (max-width: 375px) {
+                width: 300px;
             }
         }
 
@@ -1027,6 +1064,16 @@ main{
             margin-left: 140px;
             animation: more-right auto linear;
             animation-timeline: scroll(root);
+
+            @media screen and (max-width: 475px) {
+                animation: none;
+            }
+        }
+
+        .firstTitleGames{
+            @media screen and (max-width: 475px) {
+                margin-left: 25px;
+            }
         }
     }
 
@@ -1040,6 +1087,19 @@ main{
             margin-bottom: 30px;
             transition: 0.7s;
             margin-right: 35px;
+
+            @media screen and (max-width: 475px) {
+                width: 340px;
+            }
+
+            @media screen and (max-width: 435px) {
+                width: 290px;
+            }
+
+            @media screen and (max-width: 405px) {
+                width: 320px;
+            }
+            
             
 
             &:hover {
@@ -1056,6 +1116,10 @@ main{
                 height: 240px;
                 position: absolute;
                 transform: translateY(-40px);
+
+                @media screen and (max-width: 415px) {
+                    width: 350px;
+                }
             }
 
             .saleProcent{
@@ -1071,6 +1135,10 @@ main{
                 margin-left: 320px;
                 transform: translateY(-20px);
                 pointer-events: none;
+
+                @media screen and (max-width: 415px) {
+                    margin-left: 280px;
+                }
             }
             
             .description{
@@ -1081,6 +1149,10 @@ main{
                 border-bottom-left-radius: 10px;
                 border-bottom-right-radius: 10px;
                 position: absolute;
+
+                @media screen and (max-width: 415px) {
+                    width: 350px;
+                }
 
                 .title {
                     position: absolute;
@@ -1094,6 +1166,10 @@ main{
 
                     @media screen and (max-width: 975px) {
                         animation: none;
+                    }
+
+                    @media screen and (max-width: 415px) {
+                        width: 390px;
                     }
                 }
 
@@ -1150,6 +1226,10 @@ main{
                     text-align: center;
                     line-height: 45px;
 
+                    @media screen and (max-width: 415px) {
+                        margin-left: 220px;
+                    }
+
                     &:hover {
                         background-color: rgb(79, 83, 88);
                     }
@@ -1166,6 +1246,10 @@ main{
                     line-height: 40px;
                     text-align: center;
                     cursor: pointer;
+
+                    @media screen and (max-width: 415px) {
+                        margin-left: 280px;
+                    }
 
                     &:hover {
                         opacity: 0.8;
@@ -1350,6 +1434,10 @@ main{
         margin-right: 20px;
     }
 
+    @media screen and (max-width: 375px) {
+        width: 150px;
+    }
+
     svg{
         width: 30px;
         height: 30px;
@@ -1479,7 +1567,7 @@ main{
          }
 
          @media screen and (max-width: 520px) {
-            left: 10px;
+            left: 20px;
          }
 
          @media screen and (max-width: 435px) {
@@ -1516,7 +1604,7 @@ main{
          }
 
          @media screen and (max-width: 520px) {
-            margin-left: 10px;
+            margin-left: 50px;
          }
     }
 
@@ -1537,7 +1625,7 @@ main{
          }
 
          @media screen and (max-width: 520px) {
-            margin-left: 10px;
+            margin-left: 40px;
          }
 
          @media screen and (max-width: 395px) {
@@ -1573,7 +1661,7 @@ main{
         position: fixed;
         animation: show-down 1s;
 
-        @media screen and (max-width: 340px) {
+        @media screen and (max-width: 375px) {
             margin-left: 85%;
         }
 
@@ -1622,6 +1710,11 @@ main{
 
             @media screen and (max-width: 520px) {
                 width: 400px;
+            }
+
+            @media screen and (max-width: 375px) {
+                width: 350px;
+                transform: translate(-205px, -100px);
             }
          }
 

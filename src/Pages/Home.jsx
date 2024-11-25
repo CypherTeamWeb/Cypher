@@ -36,7 +36,7 @@ export default function Home() {
                   </div>
                   
                   <div className="Featured-games">
-                    <h2 className="title">{lang === 'Русский' ? 'Рекомендуемые игры' : 'Featured Games'}</h2>
+                    <h2 className="title firstTitleGames">{lang === 'Русский' ? 'Рекомендуемые игры' : 'Featured Games'}</h2>
                     <div className="input-Wrapper-Context">
                       {filtredItems.length == 0 && 
                         <div  className='filtredItems'>
