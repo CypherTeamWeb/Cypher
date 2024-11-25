@@ -15,6 +15,7 @@ import debounce from 'lodash.debounce'
 import {useDispatch, useSelector} from 'react-redux';
 import {itemsSet, wishlistSet} from '../redux/slices/itemsSlice'
 import { valueSet } from "../redux/slices/valueSlice";
+import { nameSetSettings, emailSetSettings } from "../redux/slices/settingSlice";
 
 export default function Header(){
     const [CartOpen, serCartOpen] = useState(false);
@@ -25,10 +26,14 @@ export default function Header(){
     const [SectionsOpen, setSectionsOpen] = useState('');
     const [menuOpen, setMenuOpen] = useState(false);
     const [SearchValue, setSearchValue] = useState('');
+    const [isLogin, setIsLogin] = useState(false);
+    const [loginNickname, setLoginNickname] = useState('');
+    const [loginPassword, setLoginPassword] = useState('');
+    const [loginEmail, setloginEmail] = useState('');
+    const [isReg, setIsReg] = useState(false);
 
     const item = useSelector((state) => state.items.value);
     const WishlistItems = useSelector((state) => state.items.wishlist);
-    const value = useSelector((state) => state.value.value);
     const lang = useSelector((state) => state.setting.value);
 
     const dispatch = useDispatch();
@@ -81,6 +86,19 @@ export default function Header(){
     const inputOnChange = (e) => {
         setSearchValue(e.target.value);
         inputDebounce(e.target.value)
+    }
+
+    const Login = () => {
+      if(loginNickname.length > 6 && loginEmail.includes('@') && loginEmail.includes('.com') && loginEmail.length > 6 && loginPassword.length > 6 && loginEmail.includes('gmail') && loginNickname.length < 20) {
+        setIsLogin(true);
+        dispatch(nameSetSettings(loginNickname));
+        dispatch(emailSetSettings(loginEmail));
+        setLoginNickname('');
+        setloginEmail('');
+        setLoginPassword('');
+      } else {
+        alert('Incorrectly entered data.')
+      }
     }
 
     return (
@@ -154,11 +172,11 @@ export default function Header(){
           {UserOpen ? 
             <div className="UserOpen" style={{display: WishListOpen ? 'none' : 'block', marginTop: menuOpen && '100px',  overflowY: SettingsOpen ? 'auto' : 'none', color: 'red'}}>
               
-                <div className="top-section" style={{display: SettingsOpen ? 'none' : 'block'}}>
+                <div className="top-section" style={{display: SettingsOpen ? 'none' : 'block' && !isLogin ? 'none' : 'block'}}>
                     <UserTopSection />
                 </div>
 
-                <div className="sectionsWrapper" style={{display: SettingsOpen ? 'none' : 'block'}}> 
+                <div className="sectionsWrapper" style={{display: SettingsOpen ? 'none' : 'block' && !isLogin ? 'none' : 'block'}}> 
                     <div className="wishlist" onClick={() => setWishListOpen(true)}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0  2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
                     <p>{lang === 'Русский' ? 'Понравившияся' : 'Wishlist'}</p>
@@ -173,11 +191,23 @@ export default function Header(){
                         1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
                     <p>{lang === 'Русский' ? 'Настройки' : 'Settings'}</p>
                   </div>
-                  <div className="SignOut">
+                  <div className="SignOut" onClick={() => setIsLogin(false)}>
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out "><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" x2="9" y1="12" y2="12"></line></svg>
                     <p>{lang === 'Русский' ? 'Выйти' : 'Sign out'}</p>
                   </div>
                   </div>
+
+                  {!isLogin && 
+                    <div className="LoginWrapper">
+                      <h1>{isReg ? 'Registration' : "Login"}</h1>
+                      {isReg && <input type="text" placeholder="NickName" value={loginNickname} onChange={(e) => setLoginNickname(e.target.value)} />}
+                      <input type="email" placeholder="Email" value={loginEmail} onChange={(e) => setloginEmail(e.target.value)} />
+                      <input type="password" placeholder="Password" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} />
+                      <a href="#" style={{marginLeft: isReg ? '200px' : '150px' }} onClick={() => setIsReg(!isReg)} className="setRegiser">{isReg ? 'Login' : 'Registration'}</a>
+
+                      <div className="Login" onClick={Login}>{isReg ? 'Registration' : 'Login'}</div>
+                    </div>
+                  }
 
                   {SettingsOpen ? 
                     <div className="SettingsOpen" style={{display: SectionsOpen != '' ? 'none' : 'block'}}>

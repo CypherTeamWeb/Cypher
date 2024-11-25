@@ -1776,6 +1776,59 @@ main{
     }
 }
 
+.LoginWrapper{
+
+    h1{
+        color: #fff;
+        font-size: 25px;
+        margin-left: 20px;
+    }
+    input{
+        margin-left: 50px;
+        margin-top: 10px;
+        background-color: transparent;
+        border: none;
+        border-bottom: 1px solid #333f51;
+        outline: none;
+        color: #fff;
+
+        &::placeholder{
+            color: #fff;
+            transition: 0.5s;
+        }
+
+        &:focus-within::placeholder{
+            transform: translate(10px);
+        }
+    }
+
+    .setRegiser{
+        text-decoration: none;
+        margin-top: 5px;
+        color: #fff;
+        font-weight: 100;
+    }
+
+    .Login{
+        color: #fff;
+        background-color: rgb(59 130 246);
+        width: 170px;
+        height: 35px;
+        border-radius: 50px;
+        text-align: center;
+        line-height: 35px;
+        cursor: pointer;
+        transition: 0.5s;
+        margin-top: 20px;
+        margin-left: 45px;
+        position: absolute;
+
+        &:hover{
+            opacity: 0.7;
+        }
+    }
+}
+
 .alert{
     position: absolute;
     border: none;
