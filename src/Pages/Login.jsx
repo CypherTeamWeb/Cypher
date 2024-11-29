@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import {Link, useNavigate} from 'react-router-dom'
 import { nameSetSettings, emailSetSettings, isLoginset } from "../redux/slices/settingSlice";
+import { Alert } from 'antd';
 
 export default function Login(){
     const [nameValue, setNameValue] = useState('')
