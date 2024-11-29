@@ -28,6 +28,14 @@ html{
     scroll-behavior: smooth;
 }
 
+.WorkA{
+    @media screen and (max-width: 610px) {
+        width: 150px;
+        line-height: 25px;
+        margin-top: 15px;
+    }
+}
+
 .header{
     background-color: #11182780;
     width: 100%;
@@ -254,7 +262,6 @@ html{
     }
 }
 
-
 .UserOpen{
     position: fixed;
     width: 270px;
@@ -264,7 +271,7 @@ html{
     border-radius: 10px;
     margin-top: 80px;
     margin-left: 74%;
-    overflow-x: none;
+    overflow-x: hidden;
     animation: showOpacity 0.6s;
 
     @media screen and (max-width: 1050px) {
@@ -1827,6 +1834,287 @@ main{
             opacity: 0.7;
         }
     }
+}
+
+.LoginPageWrapper{
+    position: absolute;
+    top: 25%;
+    transform: translateY(-50%);
+
+    @media screen and (max-width: 1050px) {
+        left: -200px;
+    }
+
+    @media screen and (max-width: 845px) {
+        left: -300px;
+    }
+
+    .SetRegistration{
+        position: absolute;
+        margin-top: 130px;
+        margin-left: 900px;
+        cursor: pointer;
+        user-select: none;
+
+        @media screen and (max-width: 690px) {
+            margin-left: 800px;
+        }
+
+        @media screen and (max-width: 600px) {
+            margin-left: 700px;
+        }
+
+        @media screen and (max-width: 490px) {
+            margin-left: 600px;
+        }
+
+        @media screen and (max-width: 390px) {
+            margin-left: 550px;
+        }
+    }
+
+    .LoginTitle{
+        color: #fff;
+        position: absolute;
+        margin-left: 350px;
+        margin-top: 60px;
+    }
+
+    .inputWrapper{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .emailSvg{
+        top: 158px;
+    }
+
+    .passwordSvg{
+        top: 300px;
+        transition: 0.5s;
+    }
+
+    .nicnameSvg{
+        top: 226px;
+    }
+
+    .LoginSubmit{
+        position: absolute;
+        background-color: transparent;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 50px;
+        width: 200px;
+        height: 45px;
+        text-align: center;
+        line-height: 45px;
+        cursor: pointer;
+        left: 205%;
+        top: 350px;
+        transition: 0.5s;
+        border: 2px solid rgb(59 130 246);
+
+        @media screen and (max-width: 745px) {
+            left: 180%;
+        }
+
+        @media screen and (max-width: 645px) {
+            left: 160%;
+        }
+
+        @media screen and (max-width: 560px) {
+            left: 140%;
+        }
+
+        @media screen and (max-width: 485px) {
+            top: 420px;
+            left: 110%;
+        }
+
+        @media screen and (max-width: 365px) {
+            left: 90%;
+        }
+
+        @media screen and (max-width: 275px) {
+            left: 80%;
+        }
+
+        &:hover{
+            background-color: rgb(59 130 246);
+        }
+    }
+
+    .SetRegistration{
+        color: #fff;
+    }
+
+    svg{
+        color: #fff;
+        width: 25px;
+        position: absolute;
+        height: 25px;
+        left: 860px;
+        margin-left: 10px;
+        transition: none;
+        z-index: 100;
+        pointer-events: none;
+
+        @media screen and (max-width: 625px) {
+            left: 750px;
+        }
+
+        @media screen and (max-width: 515px) {
+            left: 700px;
+        }
+
+        @media screen and (max-width: 465px) {
+            left: 665px;
+        }
+
+        @media screen and (max-width: 425px) {
+            left: 620px;
+        }
+
+        @media screen and (max-width: 370px) {
+            left: 590px;
+        }
+    }
+
+    input{
+        border: none;
+        outline: none;
+        height: 35px;
+        border-radius: 10px;
+        width: 400px;
+        background-color: transparent;
+        color: #fff;
+        position: relative;
+        top: 150px;
+        left: 500px;
+        transition: 0.5s;
+        border: 2px solid rgb(59 130 246);
+        margin-bottom: 30px;
+
+        @media screen and (max-width: 625px) {
+            left: 400px;
+        }
+
+        @media screen and (max-width: 515px) {
+            left: 350px;
+        }
+
+        @media screen and (max-width: 465px) {
+            left: 310px;
+        }
+
+        @media screen and (max-width: 425px) {
+            width: 350px;
+        }
+
+        @media screen and (max-width: 370px) {
+            width: 320px;
+        }
+        
+
+        &::placeholder{
+            color: #fff;
+            transition: 0.5s;
+            transform: translate(10px);
+        }
+
+        &:focus::placeholder{
+            transform: translate(20px);
+        }
+
+        &:focus{
+            background-color: rgb(59 130 246);
+        }
+    }
+
+    .eng{
+        position: absolute;
+        display: flex;
+        margin-left: 900px;
+        margin-top: 75px;
+        color: #fff;
+        cursor: pointer;
+        user-select: none;
+
+        @media screen and (max-width: 645px) {
+            margin-left: 850px;
+        }
+
+        @media screen and (max-width: 600px) {
+            margin-left: 750px;
+        }
+
+        @media screen and (max-width: 490px) {
+            margin-left: 700px;
+        }
+
+        @media screen and (max-width: 440px) {
+            margin-left: 650px;
+        }
+
+        @media screen and (max-width: 390px) {
+            margin-left: 610px;
+        }
+
+        @media screen and (max-width: 350px) {
+            margin-left: 590px;
+        }
+        
+        p{
+            margin-right: 10px;
+            transform: translateY(-18px);
+            margin-left: 10px;
+        }
+
+        .Englang{
+            position: absolute;
+            margin-left: -35px;
+            transition: 1s;
+        }
+
+        .Ru{
+            position: absolute;
+            top: 1px;
+            margin-left: 14px;
+            transition: 1s;
+        }
+    }
+    
+    .LoginBack{
+        position: absolute;
+        background-color: rgb(59 130 246);
+        color: #fff;
+        text-decoration: none;
+        border-radius: 50px;
+        width: 200px;
+        height: 45px;
+        text-align: center;
+        line-height: 45px;
+        cursor: pointer;
+        left: 85%;
+        top: 350px;
+
+        @media screen and (max-width: 485px) {
+            left: 110%;
+        }
+
+        @media screen and (max-width: 365px) {
+            left: 90%;
+        }
+
+        @media screen and (max-width: 275px) {
+            left: 80%;
+        }
+    
+    
+        &:hover{
+            opacity: 0.7;
+        }
+    }    
 }
 
 .alert{

@@ -15,7 +15,7 @@ import debounce from 'lodash.debounce'
 import {useDispatch, useSelector} from 'react-redux';
 import {itemsSet, wishlistSet} from '../redux/slices/itemsSlice'
 import { valueSet } from "../redux/slices/valueSlice";
-import { nameSetSettings, emailSetSettings } from "../redux/slices/settingSlice";
+import { nameSetSettings, emailSetSettings, isLoginset } from "../redux/slices/settingSlice";
 
 export default function Header(){
     const [CartOpen, serCartOpen] = useState(false);
@@ -26,12 +26,12 @@ export default function Header(){
     const [SectionsOpen, setSectionsOpen] = useState('');
     const [menuOpen, setMenuOpen] = useState(false);
     const [SearchValue, setSearchValue] = useState('');
-    const [isLogin, setIsLogin] = useState(false);
     const [loginNickname, setLoginNickname] = useState('');
     const [loginPassword, setLoginPassword] = useState('');
     const [loginEmail, setloginEmail] = useState('');
     const [isReg, setIsReg] = useState(false);
 
+    const isLogin = useSelector((state) => state.setting.isLogin)
     const item = useSelector((state) => state.items.value);
     const WishlistItems = useSelector((state) => state.items.wishlist);
     const lang = useSelector((state) => state.setting.value);
@@ -89,15 +89,15 @@ export default function Header(){
     }
 
     const Login = () => {
-      if(loginNickname.length > 6 && loginEmail.includes('@') && loginEmail.includes('.com') && loginEmail.length > 6 && loginPassword.length > 6 && loginEmail.includes('gmail') && loginNickname.length < 20) {
-        setIsLogin(true);
-        dispatch(nameSetSettings(loginNickname));
+     if(loginEmail.includes('@') && loginEmail.includes('.com') && loginEmail.length > 6 && loginPassword.length > 6 && loginEmail.includes('gmail') && loginNickname.length < 20) {
+        isReg ? loginNickname.length < 20 && loginNickname.length > 4 && dispatch(isLoginset(true)) : dispatch(isLoginset(true))
+        isReg && loginNickname.length < 20 && loginNickname.length > 4 && dispatch(nameSetSettings(loginNickname))
         dispatch(emailSetSettings(loginEmail));
         setLoginNickname('');
         setloginEmail('');
         setLoginPassword('');
       } else {
-        alert('Incorrectly entered data.')
+          alert('Incorrectly entered data.')
       }
     }
 
@@ -106,12 +106,12 @@ export default function Header(){
             <div className="header">
               <Link className="toHome" to={'/'}>CypherTeam</Link>
               <div className="navigation" style={{display: menuOpen && 'flex', flexDirection: menuOpen ? 'column' : 'row', marginTop: menuOpen && '70px'}}>
-                <a href="#" style={{transform: menuOpen ? 'translate(100px,50px)' : ''}}
-                >{lang === 'Русский' ? 'Магазин' : 'Store'}</a>
-                <a href="#" style={{transform: menuOpen ? 'translate(100px,20px)' : ''}}>
-                  {lang === 'Русский' ? 'Библиотека' :'Library'}</a>
-                <a href="/WorkTogether" style={{transform: menuOpen ? 'translate(100px,-10px)' : ''}}>
-                  {lang === 'Русский' ? 'Хотите присоединиться к нашей команде?' : 'Wanna work together?'}</a>
+                <Link to="#" style={{transform: menuOpen ? 'translate(100px,50px)' : ''}}
+                >{lang === 'Русский' ? 'Магазин' : 'Store'}</Link>
+                <Link to="#" style={{transform: menuOpen ? 'translate(100px,20px)' : ''}}>
+                  {lang === 'Русский' ? 'Библиотека' :'Library'}</Link>
+                <Link to="/WorkTogether" className="WorkA" style={{transform: menuOpen ? 'translate(100px,-10px)' : ''}}>
+                  {lang === 'Русский' ? 'Хотите присоединиться к нашей команде?' : 'Wanna work together?'}</Link>
               </div>
 
               <div className="menu-wrapper" onClick={() => setMenuOpen(!menuOpen)}>
@@ -191,7 +191,7 @@ export default function Header(){
                         1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
                     <p>{lang === 'Русский' ? 'Настройки' : 'Settings'}</p>
                   </div>
-                  <div className="SignOut" onClick={() => setIsLogin(false)}>
+                  <div className="SignOut" onClick={() => dispatch(isLoginset(false))}>
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out "><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" x2="9" y1="12" y2="12"></line></svg>
                     <p>{lang === 'Русский' ? 'Выйти' : 'Sign out'}</p>
                   </div>

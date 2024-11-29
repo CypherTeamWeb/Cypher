@@ -4,6 +4,7 @@ const initialState = {
     value: 'English',
     name: 'Guest User',
     email: 'guest@example.com',
+    isLogin: false,
 }
 
 const settingSlice = createSlice({
@@ -19,8 +20,11 @@ const settingSlice = createSlice({
         emailSetSettings: (state, action) => {
             state.email = action.payload
         },
+        isLoginset: (state, action) => {
+            state.isLogin = action.payload
+        },
     },
 });
 
-export const {valueSetSettings, nameSetSettings, emailSetSettings} = settingSlice.actions;
+export const {valueSetSettings, nameSetSettings, emailSetSettings, isLoginset} = settingSlice.actions;
 export default settingSlice.reducer;
