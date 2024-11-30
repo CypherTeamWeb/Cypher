@@ -10,6 +10,7 @@ import CardInWishList from "./CardInWishList";
 import {SettingsSections} from '../Configs/Settings'
 import SectionsOpenpage from "./SectionsOpen";
 import debounce from 'lodash.debounce'
+import Cookies from 'js-cookie'
 
 // redux import
 import {useDispatch, useSelector} from 'react-redux';
@@ -35,6 +36,7 @@ export default function Header(){
     const item = useSelector((state) => state.items.value);
     const WishlistItems = useSelector((state) => state.items.wishlist);
     const lang = useSelector((state) => state.setting.value);
+    const name = useSelector((state) => state.setting.name);
 
     const dispatch = useDispatch();
 
@@ -89,13 +91,37 @@ export default function Header(){
     }
 
     const Login = () => {
-     if(loginEmail.includes('@') && loginEmail.includes('.com') && loginEmail.length > 6 && loginPassword.length > 6 && loginEmail.includes('gmail') && loginNickname.length < 20) {
-        isReg ? loginNickname.length < 20 && loginNickname.length > 4 && dispatch(isLoginset(true)) : dispatch(isLoginset(true))
-        isReg && loginNickname.length < 20 && loginNickname.length > 4 && dispatch(nameSetSettings(loginNickname))
-        dispatch(emailSetSettings(loginEmail));
-        setLoginNickname('');
-        setloginEmail('');
-        setLoginPassword('');
+      if(loginEmail.includes('@') && loginEmail.includes('.com') && loginEmail.length > 6 && loginPassword.length > 6 && loginEmail.includes('gmail') && 
+      loginNickname.length < 20) {
+        const userReg = Cookies.get(loginNickname);
+          if(isReg && loginNickname.length < 20 && loginNickname.length > 4 && !userReg.includes(loginNickname) && !userReg.includes(loginEmail)){
+              Cookies.set(loginNickname, `${loginPassword} ${loginEmail}`, { HttpOnly: true });
+              dispatch(nameSetSettings(loginNickname))  
+              dispatch(emailSetSettings(loginEmail));
+              dispatch(isLoginset(true));
+          } else {
+            alert('User already exist')
+          }
+
+          if(!isReg){
+              const user = Cookies.get(loginNickname);
+              
+              if(user){
+                 if(user.includes(loginPassword) && user.includes(loginEmail)){
+                      dispatch(nameSetSettings(loginNickname))  
+                      dispatch(emailSetSettings(loginEmail));
+                      dispatch(isLoginset(true));
+                 } else {
+                       alert('User Do not exist')
+                 }
+              } else{
+                  alert('User Do not exist')
+              }
+          }
+
+          setLoginNickname('')
+          setloginEmail('');
+          setLoginPassword('');
       } else {
           alert('Incorrectly entered data.')
       }
@@ -105,6 +131,10 @@ export default function Header(){
       setMenuOpen(!menuOpen);
       menuOpen && setUserOpen(false);
       menuOpen && serCartOpen(false);
+    }
+
+    const SingOut = () => {
+      dispatch(isLoginset(false));
     }
 
     return (
@@ -197,7 +227,7 @@ export default function Header(){
                         1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
                     <p>{lang === 'Русский' ? 'Настройки' : 'Settings'}</p>
                   </div>
-                  <div className="SignOut" onClick={() => dispatch(isLoginset(false))}>
+                  <div className="SignOut" onClick={SingOut}>
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out "><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" x2="9" y1="12" y2="12"></line></svg>
                     <p>{lang === 'Русский' ? 'Выйти' : 'Sign out'}</p>
                   </div>
@@ -206,7 +236,7 @@ export default function Header(){
                   {!isLogin && 
                     <div className="LoginWrapper">
                       <h1>{isReg ? 'Registration' : "Login"}</h1>
-                      {isReg && <input type="text" placeholder="NickName" value={loginNickname} onChange={(e) => setLoginNickname(e.target.value)} />}
+                      { <input type="text" placeholder="NickName" value={loginNickname} onChange={(e) => setLoginNickname(e.target.value)} />}
                       <input type="email" placeholder="Email" value={loginEmail} onChange={(e) => setloginEmail(e.target.value)} />
                       <input type="password" placeholder="Password" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} />
                       <a href="#" style={{marginLeft: isReg ? '200px' : '150px' }} onClick={() => setIsReg(!isReg)} className="setRegiser">{isReg ? 'Login' : 'Registration'}</a>
