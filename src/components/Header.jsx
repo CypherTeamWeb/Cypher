@@ -90,40 +90,53 @@ export default function Header(){
         inputDebounce(e.target.value)
     }
 
+    const getCokie = (type, name) => {
+      const cookies = document.cookie
+          .split(" ")
+          .find((row) => row.startsWith(`${type}=${name}`));
+
+      return cookies ? cookies.split("=")[1] : null
+  }
+
     const Login = () => {
       if(loginEmail.includes('@') && loginEmail.includes('.com') && loginEmail.length > 6 && loginPassword.length > 6 && loginEmail.includes('gmail') && 
-      loginNickname.length < 20) {
-        const userReg = Cookies.get(loginNickname);
-          if(isReg && loginNickname.length < 20 && loginNickname.length > 4 && !userReg.includes(loginNickname) && !userReg.includes(loginEmail)){
-              Cookies.set(loginNickname, `${loginPassword} ${loginEmail}`, { HttpOnly: true });
+      loginNickname.length < 20) {   
+          const expirationDate = new Date();
+          expirationDate.setDate(expirationDate.getDate() + 30);
+
+          const email = getCokie('email', loginEmail);
+          const password = getCokie('password', loginPassword);
+
+          if(isReg && loginNickname.length < 20 && loginNickname.length > 4 && email !== loginEmail && password !== loginPassword){
+              document.cookie = `email=${loginEmail} password=${loginPassword} ; expires=${expirationDate.toUTCString()}; path=/`  
               dispatch(nameSetSettings(loginNickname))  
               dispatch(emailSetSettings(loginEmail));
               dispatch(isLoginset(true));
-          } else {
-            alert('User already exist')
+              redirect('/');
+          } else{
+             isReg && alert('this user alreay exist.')
           }
 
           if(!isReg){
-              const user = Cookies.get(loginNickname);
+              const email = getCokie('email', loginEmail);
+              const password = getCokie('password', loginPassword);
               
-              if(user){
-                 if(user.includes(loginPassword) && user.includes(loginEmail)){
+              if (email === loginEmail && password === loginPassword){
                       dispatch(nameSetSettings(loginNickname))  
                       dispatch(emailSetSettings(loginEmail));
                       dispatch(isLoginset(true));
-                 } else {
-                       alert('User Do not exist')
+                      redirect('/');
                  }
-              } else{
-                  alert('User Do not exist')
               }
-          }
 
           setLoginNickname('')
-          setloginEmail('');
           setLoginPassword('');
+          setloginEmail('');
       } else {
-          alert('Incorrectly entered data.')
+          alert('Incorrectly entered data.');
+          setLoginNickname('')
+          setLoginPassword('');
+          setloginEmail('');
       }
     }
 

@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import {Link, useNavigate} from 'react-router-dom'
 import { nameSetSettings, emailSetSettings, isLoginset } from "../redux/slices/settingSlice";
-import Cookies from 'js-cookie'
 
 export default function Login(){
     const [nameValue, setNameValue] = useState('')
@@ -11,48 +10,65 @@ export default function Login(){
     const [isEng, setIsEng] = useState(true);
     const [isReg, setIsReg] = useState(false);
     const redirect = useNavigate()
-
+    
     const dispatch = useDispatch();
 
-    const Registration = () => {
+    const getCokie = (type, name) => {
+        const cookies = document.cookie
+            .split(" ")
+            .find((row) => row.startsWith(`${type}=${name}`));
+
+        return cookies ? cookies.split("=")[1] : null
+    }
+
+    const Registration = async () => {
         if(emailValue.includes('@') && emailValue.includes('.com') && emailValue.length > 6 && passwordValue.length > 6 && emailValue.includes('gmail') && 
-        nameValue.length < 20) {
-            const userReg = Cookies.get(nameValue);
-            if(isReg && nameValue.length < 20 && nameValue.length > 4 && !userReg.includes(nameValue) && !userReg.includes(emailValue)){
-                Cookies.set(nameValue, `${passwordValue} ${emailValue}`);
+        nameValue.length < 20) {   
+            const expirationDate = new Date();
+            expirationDate.setDate(expirationDate.getDate() + 30);
+
+            const email = getCokie('email', emailValue);
+            const password = getCokie('password', passwordValue);
+
+            if(isReg && nameValue.length < 20 && nameValue.length > 4 && email !== emailValue && password !== passwordValue){
+                document.cookie = `email=${emailValue} password=${passwordValue} ; expires=${expirationDate.toUTCString()}; path=/`  
                 dispatch(nameSetSettings(nameValue))  
                 dispatch(emailSetSettings(emailValue));
                 dispatch(isLoginset(true));
                 redirect('/');
             } else{
-                alert('User do not exist')
+               isReg && alert('this user alreay exist.')
             }
 
             if(!isReg){
-                const user = Cookies.get(nameValue);
+                const email = getCokie('email', emailValue);
+                const password = getCokie('password', passwordValue);
                 
-                if(user){
-                   if(user.includes(passwordValue) && user.includes(emailValue)){
+                if (email === emailValue && password === passwordValue){
                         dispatch(nameSetSettings(nameValue))  
                         dispatch(emailSetSettings(emailValue));
                         dispatch(isLoginset(true));
                         redirect('/');
-                   } else {
-                         alert('User Do not exist')
                    }
-                } else{
-                    alert('User Do not exist')
                 }
-            }
 
             setEmailValue('')
             setNameValue('');
             setPasswordValue('');
         } else {
-            alert('Incorrectly entered data.')
+            alert('Incorrectly entered data.');
+            setEmailValue('')
+            setNameValue('');
+            setPasswordValue('');
         }
     }
 
+    const setRegFunc = () => {
+        setIsReg(!isReg);
+        setEmailValue('')
+        setNameValue('');
+        setPasswordValue('');
+    }
     
     return (
         <>
@@ -74,7 +90,7 @@ export default function Login(){
                     <svg xmlns="http://www.w3.org/2000/svg" style={{marginLeft: passwordValue && '-15px'}} width="16" height="16" fill="currentColor" class="passwordSvg" viewBox="0 0 16 16"><path d="M0 8a4 4 0 0 1 7.465-2H14a.5.5 0 0 1 .354.146l1.5 1.5a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0L13 9.207l-.646.647a.5.5 0 0 1-.708 0L11 9.207l-.646.647a.5.5 0 0 1-.708 0L9 9.207l-.646.647A.5.5 0 0 1 8 10h-.535A4 4 0 0 1 0 8m4-3a3 3 0 1 0 2.712 4.285A.5.5 0 0 1 7.163 9h.63l.853-.854a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.793-.793-1-1h-6.63a.5.5 0 0 1-.451-.285A3 3 0 0 0 4 5"/><path d="M4 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/></svg>
                     <input type="password" value={passwordValue} onChange={(e) => setPasswordValue(e.target.value)} placeholder={isEng ? 'Password' : 'Пароль'} />
                 </div>
-                <p onClick={() => setIsReg(!isReg)} className='SetRegistration'>{isReg ? isEng ? 'Login' : 'Войти' : isEng ? 'Registration' : 'Регистрация'}</p>
+                <p onClick={setRegFunc} className='SetRegistration'>{isReg ? isEng ? 'Login' : 'Войти' : isEng ? 'Registration' : 'Регистрация'}</p>
 
                 <Link to={'/'} className='LoginBack'>{isEng ? "Back" : 'Назад'}</Link>
                 <div className="LoginSubmit" onClick={Registration} >{!isReg ? isEng ? 'Login' : 'Войти' : isEng ? 'Registration' : 'Регистрация'}</div>
