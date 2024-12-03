@@ -36,7 +36,6 @@ export default function Header(){
     const item = useSelector((state) => state.items.value);
     const WishlistItems = useSelector((state) => state.items.wishlist);
     const lang = useSelector((state) => state.setting.value);
-    const name = useSelector((state) => state.setting.name);
 
     const dispatch = useDispatch();
 
@@ -170,7 +169,7 @@ export default function Header(){
               </div>
               <div className="input-wrapper"> 
                 <input type="text" className="input" value={SearchValue} onChange={inputOnChange} placeholder={lang === 'Русский' ? 'Поиск игр...' :"Search games..."}  />
-                {!SearchValue && <svg className="input-svg" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8C939F"
+                {<svg className="input-svg" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8C939F"
                     strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                    <circle cx="11" cy="11" r="8" ></circle><path d="m21 21-4.3-4.3"></path>
                 </svg>}
