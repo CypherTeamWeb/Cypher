@@ -11,7 +11,15 @@ export default function Card({price = '', title = '', imageUrl = '', company = '
     const isLogin = useSelector((state) => state.setting.isLogin);
     const redirect = useNavigate();
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+
+    const getCokie = (type, name) => {
+        const cookies = document.cookie
+            .split(" ")
+            .find((row) => row.startsWith(`${type}=${name}`));
+
+        return cookies ? cookies.split("=")[1] : null
+    }
 
     useEffect(() => {
         axios.get('https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/Wishlist').then((res) => {
@@ -75,7 +83,7 @@ export default function Card({price = '', title = '', imageUrl = '', company = '
                             -2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 
                             2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
                         </div>
-                        <div className="addToCart" onClick={isLogin ? AddTocart : () => redirect('/Login')}>
+                        <div className="addToCart" onClick={isLogin ? AddTocart : () => redirect('/Login') }>
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                                 stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1">
                             </circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg>

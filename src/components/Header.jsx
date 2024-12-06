@@ -97,46 +97,51 @@ export default function Header(){
       return cookies ? cookies.split("=")[1] : null
   }
 
-    const Login = () => {
-      if(loginEmail.includes('@') && loginEmail.includes('.com') && loginEmail.length > 6 && loginPassword.length > 6 && loginEmail.includes('gmail') && 
-      loginNickname.length < 20) {   
-          const expirationDate = new Date();
-          expirationDate.setDate(expirationDate.getDate() + 30);
+    const Login = async () => {
+      if(loginEmail.includes('@') && loginEmail.includes('.') && loginEmail.length > 6 && loginPassword.length > 6 && 
+        loginNickname.length < 20) {   
+            let email = '';
+            isReg && axios.get('https://6752a82ef3754fcea7b91e39.mockapi.io/users').then((res) => {
+                res.data.map((obj) => {
+                    if(obj.email === loginEmail){
+                        email = obj.email
+                    }
+             })
+           })
 
-          const email = getCokie('email', loginEmail);
-          const password = getCokie('password', loginPassword);
+            if(isReg && loginNickname.length < 20 && loginNickname.length > 4 && email !== loginEmail){
+                await axios.post('https://6752a82ef3754fcea7b91e39.mockapi.io/users', {name: loginNickname, password: loginPassword, email: loginEmail})
+                dispatch(nameSetSettings(loginNickname))  
+                dispatch(emailSetSettings(loginEmail));
+                dispatch(isLoginset(true));
+                redirect('/');
+            } else{
+                isReg && alert('Error this user already exist')
+            }
 
-          if(isReg && loginNickname.length < 20 && loginNickname.length > 4 && email !== loginEmail && password !== loginPassword){
-              document.cookie = `email=${loginEmail} password=${loginPassword} ; expires=${expirationDate.toUTCString()}; path=/`  
-              dispatch(nameSetSettings(loginNickname))  
-              dispatch(emailSetSettings(loginEmail));
-              dispatch(isLoginset(true));
-              redirect('/');
-          } else{
-             isReg && alert('this user alreay exist.')
-          }
+            if(!isReg){
+                axios.get('https://6752a82ef3754fcea7b91e39.mockapi.io/users').then((res) => {
+                    res.data.map((obj) => {
+                        if(obj.email === loginEmail && obj.password === loginPassword){
+                            dispatch(nameSetSettings(obj.name))  
+                            dispatch(emailSetSettings(loginEmail));
+                            dispatch(isLoginset(true));
+                            redirect('/');
+                        } else {
+                            alert('Error not correct email or password')
+                        }
+                 })
+               })
+            }
 
-          if(!isReg){
-              const email = getCokie('email', loginEmail);
-              const password = getCokie('password', loginPassword);
-              
-              if (email === loginEmail && password === loginPassword){
-                      dispatch(nameSetSettings(loginNickname))  
-                      dispatch(emailSetSettings(loginEmail));
-                      dispatch(isLoginset(true));
-                      redirect('/');
-                 }
-              }
-
-          setLoginNickname('')
-          setLoginPassword('');
-          setloginEmail('');
-      } else {
-          alert('Incorrectly entered data.');
-          setLoginNickname('')
-          setLoginPassword('');
-          setloginEmail('');
-      }
+            setloginEmail('')
+            setLoginNickname('');
+            setLoginPassword('');
+        } else {
+            alert('Incorrectly entered data.');
+            setLoginNickname('');
+            setLoginPassword('');
+        }
     }
 
     const MenuOpen = () => {
@@ -248,7 +253,7 @@ export default function Header(){
                   {!isLogin && 
                     <div className="LoginWrapper">
                       <h1>{isReg ? 'Registration' : "Login"}</h1>
-                      { <input type="text" placeholder="NickName" value={loginNickname} onChange={(e) => setLoginNickname(e.target.value)} />}
+                      {isReg && <input type="text" placeholder="NickName" value={loginNickname} onChange={(e) => setLoginNickname(e.target.value)} />}
                       <input type="email" placeholder="Email" value={loginEmail} onChange={(e) => setloginEmail(e.target.value)} />
                       <input type="password" placeholder="Password" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} />
                       <a href="#" style={{marginLeft: isReg ? '200px' : '150px' }} onClick={() => setIsReg(!isReg)} className="setRegiser">{isReg ? 'Login' : 'Registration'}</a>

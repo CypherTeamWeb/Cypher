@@ -54,12 +54,8 @@ html{
         line-height: 3.9rem;
 
         
-        @media screen and (max-width: 670px) {
+        @media screen and (max-width: 655px) {
             margin-left: 40px;
-        }
-
-        @media screen and (max-width: 605px) {
-            margin-left: 100px;
         }
 
         @media screen and (max-width: 375px) {
@@ -212,6 +208,11 @@ html{
             }
         }
 
+        @media screen and (max-width: 545px) {
+            margin-left: 70% !important;
+         }
+ 
+
         @media screen and (max-width: 690px) {
             &{
                 margin-left: 88%;
@@ -220,7 +221,7 @@ html{
 
         @media screen and (max-width: 670px) {
             display: none;
-            margin-left: 380px
+            margin-left: 64%;
         }
 
         @media screen and (max-width: 375px) {
@@ -232,8 +233,13 @@ html{
             opacity: 0.7;
         }
 
+        @media screen and (max-width: 405px) {
+            position: relative;
+            left: 50px;
+        }
+
         @media screen and (max-width: 375px) {
-            margin-left: 200px;
+           margin-left: 150px !important;
         }
     }
     
@@ -254,22 +260,17 @@ html{
             margin-left: 200px;
         }
 
-        @media screen and (min-width: 715px) {
-            display: block !important;
-        }
-
-        @media screen and (max-width: 690px) {
-            &{
-                margin-left: 94% !important;
-            }
-        }
-
         @media screen and (max-width: 670px) {
             display: none;
            &{
-                margin-left: 400px !important;
+                margin-left: 68% !important;
            }
         }
+
+        @media screen and (max-width: 545px) {
+           margin-left: 75% !important;
+        }
+
 
         @media screen and (max-width: 1230px) {
             margin-left: 94%;
@@ -281,6 +282,9 @@ html{
             }
         }
 
+        @media screen and (max-width: 405px) {
+            margin-left: 90% !important; 
+        }
            
         @media screen and (max-width: 1060px) {
             &{
@@ -1448,6 +1452,11 @@ main{
             cursor: pointer;
             user-select: none;
 
+            
+            @media screen and (max-width: 405px) {
+               width: 330px;
+            }
+
             &:hover{
                 opacity: 0.7;
             }
@@ -1493,6 +1502,11 @@ main{
     margin-left: 10px;
     margin-bottom: 15px;
     margin-top: 10px;
+
+    @media screen and (max-width: 405px) {
+        width: 340px;
+     }
+
     img{
         width: 85px;
         height: 85px;
@@ -1530,6 +1544,11 @@ main{
         transform: translateY(-55px);
         color: gray;
         cursor: pointer;
+
+        
+        @media screen and (max-width: 405px) {
+            margin-left: 310px;
+        }
 
         &:hover{
             color: red;
@@ -2149,7 +2168,7 @@ main{
     }
 
     .passwordSvg{
-        top: 300px;
+        top: 298px;
         transition: 0.5s;
     }
 
@@ -2262,9 +2281,18 @@ main{
             width: 359px;
         }
 
-        @media screen and (max-width: 400px) {
+        @media screen and (max-width: 415px) {
             width: 320px;
         }
+
+        @media screen and (max-width: 380px) {
+            width: 280px;
+        }
+
+        @media screen and (max-width: 340px) {
+            width: 250px;
+        }
+        
         
 
         &::placeholder{
@@ -2390,7 +2418,7 @@ main{
     user-select: none;
     cursor: pointer;
     position: absolute;
-    left: 590px;
+    left: 570px;
     transform: translateY(-50px);
     display: none;
 
@@ -2402,16 +2430,28 @@ main{
         display: block;
     }
 
-    @media screen and (max-width: 575px) {
-        left: 440px;
+    @media screen and (max-width: 635px) {
+        left: 540px;
     }
 
-    @media screen and (max-width: 485px) {
-        left: 380px;
+    @media screen and (max-width: 605px) {
+        left: 480px;
     }
 
-    @media screen and (max-width: 425px) {
+    @media screen and (max-width: 550px) {
+        left: 400px;
+    }
+
+    @media screen and (max-width: 445px) {
+        left: 350px;
+    }
+
+    @media screen and (max-width: 400px) {
         left: 300px;
+    }
+
+    @media screen and (max-width: 350px) {
+        left: 250px;
     }
 
     &:hover{
