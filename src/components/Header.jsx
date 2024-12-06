@@ -114,7 +114,6 @@ export default function Header(){
                 dispatch(nameSetSettings(loginNickname))  
                 dispatch(emailSetSettings(loginEmail));
                 dispatch(isLoginset(true));
-                redirect('/');
             } else{
                 isReg && alert('Error this user already exist')
             }
@@ -126,7 +125,6 @@ export default function Header(){
                             dispatch(nameSetSettings(obj.name))  
                             dispatch(emailSetSettings(loginEmail));
                             dispatch(isLoginset(true));
-                            redirect('/');
                         } else {
                             alert('Error not correct email or password')
                         }

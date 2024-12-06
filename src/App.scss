@@ -2378,7 +2378,7 @@ main{
         top: 400px;
 
         @media screen and (max-width: 520px) {
-            top: 490px;
+            top: 440px !important;
             left: 110%;
         }
 
