@@ -6,13 +6,20 @@ import NotFound from './Pages/NotFoundPage';
 import WorkTogether from './components/WorkTogether';
 import { useSelector } from 'react-redux';
 import Login from './Pages/Login';
+import { itemsSet, wishlistSet } from "./redux/slices/itemsSlice";
+import { useDispatch } from 'react-redux';
 
 export default function App() {
   const isLogin = useSelector((state) => state.setting.isLogin);
-  const redirect = useNavigate( )
+  const redirect = useNavigate();
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     window.scrollTo(0,0);
+
+    dispatch(itemsSet([]))
+    dispatch(wishlistSet([]))
 
     if(!isLogin){
       return redirect('Login')

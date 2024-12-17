@@ -36,6 +36,7 @@ export default function Header(){
     const item = useSelector((state) => state.items.value);
     const WishlistItems = useSelector((state) => state.items.wishlist);
     const lang = useSelector((state) => state.setting.value);
+    const email = useSelector((state) => state.setting.email);
 
     const dispatch = useDispatch();
 
@@ -45,16 +46,6 @@ export default function Header(){
       }, 300),
       []
     )
-
-   useEffect(() => {
-      axios.get('https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/CypherCartJson').then((res) => {
-        dispatch(itemsSet(res.data))
-      });
-
-      axios.get('https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/Wishlist').then((res) => {
-        dispatch(wishlistSet(res.data))
-      })
-   }, [])
 
    useEffect(() => {
       setPrice(0);
@@ -73,10 +64,11 @@ export default function Header(){
    }
 
    const DeleteItem = async (id) => {
-      await axios.delete(`https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/CypherCartJson/${id}`);
-
-      await axios.get('https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/CypherCartJson').then((res) => {
-        dispatch(itemsSet(res.data))
+      await axios.get('https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/CypherCartJson').then(async (res) => {
+         await res.data.forEach(async (obj) => {
+          email == obj.email && await axios.delete(`https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/CypherCartJson/${id}`);
+          email == obj.email && dispatch(itemsSet(res.data))
+        })
     })
   }
 
@@ -88,14 +80,6 @@ export default function Header(){
         setSearchValue(e.target.value);
         inputDebounce(e.target.value)
     }
-
-    const getCokie = (type, name) => {
-      const cookies = document.cookie
-          .split(" ")
-          .find((row) => row.startsWith(`${type}=${name}`));
-
-      return cookies ? cookies.split("=")[1] : null
-  }
 
     const Login = async () => {
       if(loginEmail.includes('@') && loginEmail.includes('.') && loginEmail.length > 6 && loginPassword.length > 6 && 

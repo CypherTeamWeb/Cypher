@@ -3,6 +3,7 @@ import Languages from '../Configs/Languages.json'
 import {valueSetSettings, nameSetSettings, emailSetSettings} from '../redux/slices/settingSlice'
 import { useState } from 'react';
 import { Alert } from 'antd';
+import axios from 'axios';
 
 export default function SectionsOpen({title, onClose}){
     const [name, setName] = useState('');
@@ -10,15 +11,36 @@ export default function SectionsOpen({title, onClose}){
     const value = useSelector((state) => state.setting.value);
     const [error, setError] = useState(false);
     const [success, setSuccess] = useState(false);
+    const [password, setPassword] = useState('');
+    const [Repeatpassword, setRepeatPassword] = useState('');
 
+    const emailUser = useSelector((state) => state.setting.email);
     const dispatch = useDispatch();
 
     const setNameSettings = () => {
-        if(email.includes('@') && email.includes('.com') && email.length > 6 && name.length > 4 && email.includes('gmail')){
-            dispatch(nameSetSettings(name));
-            dispatch(emailSetSettings(email));
+        // if(email.includes('@') && email.includes('.com') && email.includes('gmail') && email !== emailUser){
+        if(true){
+            axios.get('https://6752a82ef3754fcea7b91e39.mockapi.io/users').then((res) => {
+                res.data.map((obj) => {
+                    if(emailUser == obj.email){
+                        if(email && name){
+                            axios.put(`https://6752a82ef3754fcea7b91e39.mockapi.io/users/${obj.id}`, {"name": name, 'email': email})
+                        } else if(email && !name){
+                            axios.put(`https://6752a82ef3754fcea7b91e39.mockapi.io/users/${obj.id}`, {'email': email})
+                        }  else if(!email && name){
+                            axios.put(`https://6752a82ef3754fcea7b91e39.mockapi.io/users/${obj.id}`, {"name": name})
+                        } else if(password.length !== 0 && Repeatpassword.length !== 0 && password === Repeatpassword && password !== obj.password){
+                            axios.put(`https://6752a82ef3754fcea7b91e39.mockapi.io/users/${obj.id}`, {"password": password})
+                        }
+                    }
+                })
+            })
+            name && dispatch(nameSetSettings(name));
+            name && dispatch(emailSetSettings(email));
             setEmail('');
             setName('');
+            setPassword('');
+            setRepeatPassword('');
 
             setSuccess(true);
             setTimeout(() => {
@@ -49,8 +71,8 @@ export default function SectionsOpen({title, onClose}){
                 }
                 {title == 'Change Password' && 
                     <div>
-                        <input className="nickname" type="password" placeholder="Password" />
-                        <input className="repeatPassword" type="password" placeholder="Repeat Password" />
+                        <input className="nickname" value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Password" />
+                        <input className="repeatPassword" value={Repeatpassword} onChange={(e) => setRepeatPassword(e.target.value)} type="password" placeholder="Repeat Password" />
                     </div>
                 }
             </div>
@@ -69,7 +91,7 @@ export default function SectionsOpen({title, onClose}){
 
             {title !== 'Privacy' && <div 
             style={{marginTop: title == 'Language' ? '130px' : '70px', display: title === 'Language' ? 'none' : 'block'}} 
-            className="Submit" onClick={() => title == 'Edit Profile' ? setNameSettings() : null}>Submit</div>}
+            className="Submit" onClick={() => title == 'Edit Profile' || title == 'Change Password' ? setNameSettings() : null}>Submit</div>}
         </>
     )
 }

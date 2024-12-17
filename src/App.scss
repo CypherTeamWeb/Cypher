@@ -175,6 +175,11 @@ html{
         animation: show-up 1s;
         transition: 0.5s;
 
+        @media screen and (max-width: 560px) {
+            margin-left: 100px;
+        }
+
+
         @media screen and (min-width: 715px) {
             display: block !important;
         }
@@ -224,22 +229,22 @@ html{
             margin-left: 64%;
         }
 
+        @media screen and (max-width: 450px) {
+            margin-left: 320px !important;
+        }
+
+        @media screen and (max-width: 405px) {
+            position: relative;
+            left: -20px;
+        }
+
         @media screen and (max-width: 375px) {
-            margin-left: 240px;
+           margin-left: 230px !important;
         }
 
         &:hover{
             background-color: rgb(31 41 55);
             opacity: 0.7;
-        }
-
-        @media screen and (max-width: 405px) {
-            position: relative;
-            left: 50px;
-        }
-
-        @media screen and (max-width: 375px) {
-           margin-left: 150px !important;
         }
     }
     
@@ -282,8 +287,12 @@ html{
             }
         }
 
+        @media screen and (max-width: 450px) {
+            margin-left: 345px !important;
+        }
+
         @media screen and (max-width: 405px) {
-            margin-left: 90% !important; 
+            margin-left: 85% !important; 
         }
            
         @media screen and (max-width: 1060px) {
@@ -300,7 +309,7 @@ html{
 
 
         @media screen and (max-width: 375px) {
-            margin-left: 225px !important;
+            margin-left: 235px !important;
         }
 
         &:hover{
@@ -2149,6 +2158,10 @@ main{
         @media screen and (max-width: 390px) {
             margin-left: 550px;
         }
+
+        @media screen and (max-width: 340px) {
+            margin-left: 510px;
+        }
     }
 
     .LoginTitle{
@@ -2205,7 +2218,7 @@ main{
         }
 
         @media screen and (max-width: 530px) {
-            left: 110%;
+            left: 100%;
         }
 
         @media screen and (max-width: 365px) {
@@ -2377,9 +2390,9 @@ main{
         left: 85%;
         top: 400px;
 
-        @media screen and (max-width: 520px) {
+        @media screen and (max-width: 530px) {
             top: 440px !important;
-            left: 110%;
+            left: 100%;
         }
 
         @media screen and (max-width: 365px) {

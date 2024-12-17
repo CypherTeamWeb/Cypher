@@ -8,57 +8,85 @@ import { useNavigate } from "react-router-dom";
 export default function Card({price = '', title = '', imageUrl = '', company = '',sale = '',proccentSale = ''}){
     const [inFavorite, setInFavorite] = useState(false);
     const [inCart, setInCart] = useState(false);
-    const isLogin = useSelector((state) => state.setting.isLogin);
     const redirect = useNavigate();
+
+    const isLogin = useSelector((state) => state.setting.isLogin);
+    const email = useSelector((state) => state.setting.email);
+    const item = useSelector((state) => state.items.value);
+    const wishtlist = useSelector((state) => state.items.wishlist);
 
     const dispatch = useDispatch();
 
-    const getCokie = (type, name) => {
-        const cookies = document.cookie
-            .split(" ")
-            .find((row) => row.startsWith(`${type}=${name}`));
-
-        return cookies ? cookies.split("=")[1] : null
-    }
-
     useEffect(() => {
         axios.get('https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/Wishlist').then((res) => {
-            res.data.forEach((obj) => {
-                obj.imageUrl == imageUrl && setInFavorite(true)
+            res.data.forEach((obj) => { 
+                let cart = [];
+                if(obj.email == email && obj.imageUrl == imageUrl){
+                    setInFavorite(true);
+                    cart = res.data.filter((obj) => obj.email == email)
+                    dispatch(wishlistSet(cart))
+                } else{
+                    setInFavorite(false);
+                }
             })
         })
         
         axios.get('https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/CypherCartJson').then((res) => {
-            res.data.forEach((obj) => {
-                obj.imageUrl == imageUrl && setInCart(true);
+            res.data.forEach((obj) => { 
+                let cart = [];
+                if(obj.email == email && obj.imageUrl == imageUrl){
+                    setInCart(true);
+                    cart = res.data.filter((obj) => obj.email == email)
+                    dispatch(itemsSet(cart))
+                } else{
+                    setInCart(false);
+                }
             })
         })
     }, [])
 
     const AddTocart = async () => {
         setInCart(!inCart);
-        !inCart && await axios.post('https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/CypherCartJson', {title, price, company, imageUrl})
 
-        await axios.get('https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/CypherCartJson').then((res) => {
-            !inCart && dispatch(itemsSet(res.data));
+        !inCart && await axios.post('https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/CypherCartJson', {title, price, company, imageUrl, email})
+
+         await axios.get('https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/CypherCartJson').then(async (res) => {
+            !inCart && res.data.forEach(async (obj) => {
+                await obj.email == email && dispatch(itemsSet([...item, obj]))
+            })
 
             inCart && res.data.forEach(async (obj) => {
-                obj.title == title && await axios.delete(`https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/CypherCartJson/${obj.id}`)
-                obj.title == title && await axios.get('https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/CypherCartJson').then((res) => dispatch(itemsSet(res.data)))
+                if(obj.email == email && obj.title == title){
+                    let cart = [];
+                    await axios.delete(`https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/CypherCartJson/${obj.id}`)
+                    await axios.get('https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/CypherCartJson').then(async (res) =>{
+                        cart = res.data.filter((obj) => obj.email == email)
+                        dispatch(itemsSet(cart))
+                    })
+                }
             })
         })
     }
 
     const AddToFavorite = async () => {
         setInFavorite(!inFavorite)
-        !inFavorite && await axios.post('https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/Wishlist', {title, price, company, imageUrl});
 
-        await axios.get('https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/Wishlist').then((res) => {
-            !inFavorite && dispatch(wishlistSet(res.data));
+        !inFavorite && await axios.post('https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/Wishlist', {title, price, company, imageUrl, email})
+
+        await axios.get('https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/Wishlist').then(async (res) => {
+            !inFavorite && res.data.forEach(async (obj) => {
+                await obj.email == email && dispatch(wishlistSet([...wishtlist, obj]))
+            })
 
             inFavorite && res.data.forEach(async (obj) => {
-                obj.title == title && await axios.delete(`https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/Wishlist/${obj.id}`);
-                obj.title == title && await axios.get('https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/Wishlist').then((res) => dispatch(wishlistSet(res.data)))
+                if(obj.email == email && obj.title == title){
+                    let cart = [];
+                    await axios.delete(`https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/Wishlist/${obj.id}`)
+                    await axios.get('https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/Wishlist').then(async (res) =>{
+                        cart = res.data.filter((obj) => obj.email == email)
+                        dispatch(wishlistSet(cart))
+                    })
+                }
             })
         })
     }

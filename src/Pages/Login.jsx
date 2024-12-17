@@ -44,8 +44,6 @@ export default function Login(){
                             dispatch(emailSetSettings(emailValue));
                             dispatch(isLoginset(true));
                             redirect('/');
-                        } else {
-                            alert('Error not correct email or password')
                         }
                  })
                })
