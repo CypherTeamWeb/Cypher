@@ -64,11 +64,11 @@ export default function Header(){
    }
 
    const DeleteItem = async (id) => {
+      let cart = [];
+      await axios.delete(`https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/CypherCartJson/${id}`)
       await axios.get('https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/CypherCartJson').then(async (res) => {
-         await res.data.forEach(async (obj) => {
-          email == obj.email && await axios.delete(`https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/CypherCartJson/${id}`);
-          email == obj.email && dispatch(itemsSet(res.data))
-        })
+        cart = res.data.filter((obj) => obj.email === email);
+        dispatch(itemsSet(cart))
     })
   }
 

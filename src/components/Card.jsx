@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { itemsSet, wishlistSet } from "../redux/slices/itemsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import GamesJson from '../Configs/Games.json'
 
 
 export default function Card({price = '', title = '', imageUrl = '', company = '',sale = '',proccentSale = ''}){
@@ -25,8 +26,6 @@ export default function Card({price = '', title = '', imageUrl = '', company = '
                     setInFavorite(true);
                     cart = res.data.filter((obj) => obj.email == email)
                     dispatch(wishlistSet(cart))
-                } else{
-                    setInFavorite(false);
                 }
             })
         })
@@ -38,8 +37,6 @@ export default function Card({price = '', title = '', imageUrl = '', company = '
                     setInCart(true);
                     cart = res.data.filter((obj) => obj.email == email)
                     dispatch(itemsSet(cart))
-                } else{
-                    setInCart(false);
                 }
             })
         })
@@ -112,9 +109,8 @@ export default function Card({price = '', title = '', imageUrl = '', company = '
                             2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
                         </div>
                         <div className="addToCart" onClick={isLogin ? AddTocart : () => redirect('/Login') }>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                                stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1">
-                            </circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg>
+                            {!inCart && <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg>}
+                            {inCart && <svg xmlns="http://www.w3.org/2000/svg" style={{marginTop: '5px'}} width="25" height="25" fill="#fff" class="bi bi-check" viewBox="0 0 16 16"><path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/></svg>}
                         </div>
                     </div>
                 </div>
