@@ -84,20 +84,20 @@ html{
             margin-left: 60%;
         }
 
-        @media screen and (max-width: 545px) {
-            margin-left: 55%;
+        @media screen and (max-width: 550px) {
+            margin-left: 50%;
         }
         
         @media screen and (max-width: 445px) {
-            margin-left: 50%;
-        }
-
-        @media screen and (max-width: 400px) {
             margin-left: 45%;
         }
 
+        @media screen and (max-width: 400px) {
+            margin-left: 40%;
+        }
+
         @media screen and (max-width: 350px) {
-            margin-left: 35%;
+            margin-left: 30%;
         }
 
 
@@ -2151,6 +2151,22 @@ main{
         z-index: -100;
         top: -190px;
         overflow: hidden;
+
+        @media screen and (max-width: 500px) {
+            width: 180% !important;
+        }
+
+        @media screen and (max-width: 460px) {
+            width: 190% !important;
+        }
+
+        @media screen and (max-width: 400px) {
+            width: 190% !important;
+        }
+
+        @media screen and (max-width: 380px) {
+            width: 210% !important;
+        }
     }
     
     .background{
@@ -2219,51 +2235,6 @@ main{
 
     .nicnameSvg{
         top: 226px;
-    }
-
-    .LoginSubmit{
-        position: absolute;
-        background-color: transparent;
-        color: #fff;
-        text-decoration: none;
-        border-radius: 50px;
-        width: 200px;
-        height: 45px;
-        text-align: center;
-        line-height: 45px;
-        cursor: pointer;
-        left: 205%;
-        top: 400px; 
-        transition: 0.5s;
-        border: 2px solid rgb(59 130 246);
-
-        @media screen and (max-width: 815px) {
-            left: 180%;
-        }
-
-        @media screen and (max-width: 700px) {
-            left: 160%;
-        }
-
-        @media screen and (max-width: 615px) {
-            left: 140%;
-        }
-
-        @media screen and (max-width: 530px) {
-            left: 100%;
-        }
-
-        @media screen and (max-width: 365px) {
-            left: 110%;
-        }
-
-        @media screen and (max-width: 275px) {
-            left: 80%;
-        }
-
-        &:hover{
-            background-color: rgb(59 130 246);
-        }
     }
 
     .SetRegistration{
@@ -2424,22 +2395,76 @@ main{
 
         @media screen and (max-width: 530px) {
             top: 440px !important;
-            left: 100%;
-        }
-
-        @media screen and (max-width: 365px) {
             left: 110%;
         }
 
-        @media screen and (max-width: 275px) {
-            left: 80%;
+        @media screen and (max-width: 500px) {
+            top: 440px !important;
+            left: 100%;
+        }
+
+        @media screen and (max-width: 450px) {
+            left: 430px;
+        }
+
+        @media screen and (max-width: 380px) {
+            left: 390px;
         }
     
     
         &:hover{
             opacity: 0.7;
         }
-    }    
+    }  
+    
+    .LoginSubmit{
+        position: absolute;
+        background-color: transparent;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 50px;
+        width: 200px;
+        height: 45px;
+        text-align: center;
+        line-height: 45px;
+        cursor: pointer;
+        left: 205%;
+        top: 400px; 
+        transition: 0.5s;
+        border: 2px solid rgb(59 130 246);
+
+        @media screen and (max-width: 815px) {
+            left: 180%;
+        }
+
+        @media screen and (max-width: 700px) {
+            left: 160%;
+        }
+
+        @media screen and (max-width: 615px) {
+            left: 140%;
+        }
+
+        @media screen and (max-width: 530px) {
+            left: 110%;
+        }
+
+        @media screen and (max-width: 500px) {
+            left: 100%;
+        }
+
+        @media screen and (max-width: 450px) {
+            left: 430px;
+        }
+
+        @media screen and (max-width: 380px) {
+            left: 390px;
+        }
+
+        &:hover{
+            background-color: rgb(59 130 246);
+        }
+    }
 }
 
 .alert{
