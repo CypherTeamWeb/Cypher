@@ -70,6 +70,10 @@ export default function Login(){
     return (
         <>
            <div className="LoginPageWrapper">
+                <div className="bacground-image">
+                <div className="background"></div>
+                    <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=2000" alt="backgorund" />
+                </div>
                 <h1 className='LoginTitle'>{!isReg ? isEng ? 'Login' : 'Войти' : isEng ? 'Registration' : 'Регистрация'}</h1>
                 <div className="eng" onClick={() => setIsEng(!isEng)}>
                     <p style={{color: isEng ? '#fff' : '#ddd', fontWeight: isEng && '700'}} className="Englang">Eng</p>
