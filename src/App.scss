@@ -37,7 +37,7 @@ html{
 
 .header{
     background-color: #11182780;
-    min-width: 100%;
+    min-width: 99%;
     height: 65px;
     display: block;
     backdrop-filter: blur(12px);
@@ -487,6 +487,7 @@ main{
                     border-radius: 8px;
                     inset: 0;
                     transition: 1.1s;
+                    z-index: -1
                 }
                 &:hover::before{
                     width: 170px;
@@ -512,6 +513,7 @@ main{
             margin-left: 125px;
             animation: more-right auto linear;
             animation-timeline: scroll(root);
+            
 
             @media screen and (max-width: 475px) {
                 animation: none;
@@ -880,7 +882,7 @@ main{
     min-width: 100vw;
     height: 200vh;
     background-image: linear-gradient(to top, #111827, rgb(17 24 39 / .8), rgb(17 24 39 / 0));
-    z-index: 0;
+    z-index: -1;
 }
 
 .UserOpen{
@@ -1775,10 +1777,11 @@ main{
 
 .workWrapper{
     .down{
-        width: 100%;
+        min-width: 100%;
         color: #fff;
         margin-top: 200px;
         padding-bottom: 270px;
+        overflow-x: hidden;
 
         .work{
             font-size: 20px;
@@ -1815,9 +1818,10 @@ main{
             left: 50%;
             transform: translate(-50%);
             text-align: center;
-            width: 600px;
+            min-width: 300px;
             padding-bottom: 300px;
             margin-bottom: 40px;
+            overflow-x: hidden;
         }
         .wrapper{
             position: absolute;
@@ -2146,12 +2150,12 @@ main{
     z-index: 1;
     
     .bacground-image{
-        width: 400%;
+        min-width: 400%;
         height: 510%;
         position: absolute;
         z-index: -100;
         top: -190px;
-        overflow: hidden;
+        overflow: hidden !important;
 
         @media screen and (max-width: 500px) {
             width: 180% !important;
@@ -2175,6 +2179,7 @@ main{
         height: 100%;
         z-index: 1;
         top: -0px;
+        overflow-x: hidden;
     }
 
     @media screen and (max-width: 1114px) {
