@@ -10,11 +10,10 @@ import CardInWishList from "./CardInWishList";
 import {SettingsSections} from '../Configs/Settings'
 import SectionsOpenpage from "./SectionsOpen";
 import debounce from 'lodash.debounce'
-import Cookies from 'js-cookie'
 
 // redux import
 import {useDispatch, useSelector} from 'react-redux';
-import {itemsSet, wishlistSet} from '../redux/slices/itemsSlice'
+import {itemsSet} from '../redux/slices/itemsSlice'
 import { valueSet } from "../redux/slices/valueSlice";
 import { nameSetSettings, emailSetSettings, isLoginset } from "../redux/slices/settingSlice";
 
