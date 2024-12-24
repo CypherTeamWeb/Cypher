@@ -37,12 +37,16 @@ html{
 
 .header{
     background-color: #11182780;
-    min-width: 99%;
+    min-width: 98.9%;
     height: 65px;
     display: block;
     backdrop-filter: blur(12px);
     position: fixed;
     z-index: 100;
+
+    @media screen and (max-width: 680px) {
+        width: 100%;
+    }
 
     .toHome{
         margin-left: 120px;
@@ -888,7 +892,7 @@ main{
     position: absolute;
     inset: 0;
     min-width: 100vw;
-    height: 170vh;
+    height: 200%;
     background-image: linear-gradient(to top, #111827, rgb(17 24 39 / .8), rgb(17 24 39 / 0));
     z-index: -1;
 }
