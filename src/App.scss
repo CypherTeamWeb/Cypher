@@ -895,6 +895,18 @@ main{
     height: 200%;
     background-image: linear-gradient(to top, #111827, rgb(17 24 39 / .8), rgb(17 24 39 / 0));
     z-index: -1;
+
+    @media screen and (max-width: 1250px) {
+        height: 250%;
+    }
+
+    @media screen and (max-width: 1250px) {
+        height: 250%;
+    }
+
+    @media screen and (max-width: 675px) {
+        height: 300%;
+    }
 }
 
 .UserOpen{
