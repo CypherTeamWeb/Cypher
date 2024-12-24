@@ -513,7 +513,6 @@ main{
             margin-left: 125px;
             animation: more-right auto linear;
             animation-timeline: scroll(root);
-            
 
             @media screen and (max-width: 475px) {
                 animation: none;
@@ -521,6 +520,15 @@ main{
         }
 
         .firstTitleGames{
+            @media screen and (max-width: 1055px) {
+                margin-left: 90px;
+            }
+
+            @media screen and (max-width: 950px) {
+                margin-left: 40px;
+            }
+
+
             @media screen and (max-width: 475px) {
                 margin-left: 25px;
             }
@@ -880,7 +888,7 @@ main{
     position: absolute;
     inset: 0;
     min-width: 100vw;
-    height: 200vh;
+    height: 170vh;
     background-image: linear-gradient(to top, #111827, rgb(17 24 39 / .8), rgb(17 24 39 / 0));
     z-index: -1;
 }
@@ -1749,6 +1757,7 @@ main{
 
     @media screen and (max-width: 375px) {
         width: 150px;
+        margin-left: -35px;
     }
 
     svg{
@@ -1777,7 +1786,6 @@ main{
 
 .workWrapper{
     .down{
-        min-width: 100%;
         color: #fff;
         margin-top: 200px;
         padding-bottom: 270px;
@@ -1818,7 +1826,7 @@ main{
             left: 50%;
             transform: translate(-50%);
             text-align: center;
-            min-width: 300px;
+            min-width: 3a00px;
             padding-bottom: 300px;
             margin-bottom: 40px;
             overflow-x: hidden;
@@ -1845,7 +1853,7 @@ main{
         }
 
         .contact{
-            width: 300px;
+            min-width: 300px;
             height: 100px;
             border: 3px solid rgb(59 130 246);
             border-radius: 10px;
@@ -1977,7 +1985,7 @@ main{
         animation: show-down 1s;
 
         @media screen and (max-width: 375px) {
-            margin-left: 65%;
+            margin-left: 77%;
         }
 
         .Englang{
@@ -1994,13 +2002,13 @@ main{
     }
 
     .WorktopSection{
-        width: 90%;
         height: 600px;
         margin-left: 70px;
         border-radius: 20px;
         margin-top: 70px;
         display: flex;
         justify-content: end;
+        overflow-x: hidden;
 
          .board{
             background-color: rgb(59 130 246);
@@ -2028,7 +2036,7 @@ main{
             }
 
             @media screen and (max-width: 375px) {
-                width: 350px;
+                width: 340px;
                 transform: translate(-205px, -100px);
             }
          }
