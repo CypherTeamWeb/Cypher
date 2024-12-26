@@ -93,7 +93,9 @@ export default function Login(){
                 </div>
                 <p onClick={setRegFunc} className='SetRegistration'>{isReg ? isEng ? 'Login' : 'Войти' : isEng ? 'Registration' : 'Регистрация'}</p>
 
-                <Link to={'/'} className='LoginBack' style={{top: !isReg && '350px'}}>{isEng ? "Back" : 'Назад'}</Link>
+                <div className="logiBackWrapper">
+                    <Link to={'/'} className='LoginBack' style={{top: !isReg && '350px'}}>{isEng ? "Back" : 'Назад'}</Link>
+                </div>
                 <div className="LoginSubmit" style={{top: !isReg && '350px'}} onClick={Registration} >{!isReg ? isEng ? 'Login' : 'Войти' : isEng ? 'Registration' : 'Регистрация'}</div>
            </div>
         </>
