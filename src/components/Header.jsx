@@ -108,8 +108,6 @@ export default function Header(){
                             dispatch(nameSetSettings(obj.name))  
                             dispatch(emailSetSettings(loginEmail));
                             dispatch(isLoginset(true));
-                        } else {
-                            alert('Error not correct email or password')
                         }
                  })
                })
@@ -140,8 +138,8 @@ export default function Header(){
             <div className="header">
               <Link className="toHome" to={'/'}>CypherTeam</Link>
               <div className="navigation" style={{display: menuOpen && 'flex', flexDirection: menuOpen ? 'column' : 'row', marginTop: menuOpen && '70px'}}>
-                <Link to="#" style={{transform: menuOpen ? 'translate(100px,50px)' : ''}}
-                >{lang === 'Русский' ? 'Магазин' : 'Store'}</Link>
+                <a href="#Featured-games" style={{transform: menuOpen ? 'translate(100px,50px)' : ''}}
+                >{lang === 'Русский' ? 'Магазин' : 'Store'}</a>
                 <Link to="#" style={{transform: menuOpen ? 'translate(100px,20px)' : ''}}>
                   {lang === 'Русский' ? 'Библиотека' :'Library'}</Link>
                 <Link to="/WorkTogether" className="WorkA" style={{transform: menuOpen ? 'translate(100px,-10px)' : ''}}>
