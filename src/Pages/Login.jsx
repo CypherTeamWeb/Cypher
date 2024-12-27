@@ -67,6 +67,7 @@ export default function Login(){
         setPasswordValue('');
     }
     
+    
     return (
         <>
            <div className="LoginPageWrapper">
@@ -94,7 +95,7 @@ export default function Login(){
                 <p onClick={setRegFunc} className='SetRegistration'>{isReg ? isEng ? 'Login' : 'Войти' : isEng ? 'Registration' : 'Регистрация'}</p>
 
                 <div className="logiBackWrapper">
-                    <Link to={'/'} className='LoginBack' style={{top: !isReg && '350px'}}>{isEng ? "Back" : 'Назад'}</Link>
+                    <Link to={'/'} className='LoginBack' style={{top: !isReg && '350px', marginTop: window.innerWidth <= 530 ? isReg && '40px' : '0'}}>{isEng ? "Back" : 'Назад'}</Link>
                 </div>
                 <div className="LoginSubmit" style={{top: !isReg && '350px'}} onClick={Registration} >{!isReg ? isEng ? 'Login' : 'Войти' : isEng ? 'Registration' : 'Регистрация'}</div>
            </div>
