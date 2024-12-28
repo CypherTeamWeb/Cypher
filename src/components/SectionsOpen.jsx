@@ -17,41 +17,134 @@ export default function SectionsOpen({title, onClose}){
     const emailUser = useSelector((state) => state.setting.email);
     const dispatch = useDispatch();
 
-    const setNameSettings = () => {
-        // if(email.includes('@') && email.includes('.com') && email.includes('gmail') && email !== emailUser){
-        if(true){
-            axios.get('https://6752a82ef3754fcea7b91e39.mockapi.io/users').then((res) => {
-                res.data.map((obj) => {
-                    if(emailUser == obj.email){
-                        if(email && name){
-                            axios.put(`https://6752a82ef3754fcea7b91e39.mockapi.io/users/${obj.id}`, {"name": name, 'email': email})
-                        } else if(email && !name){
-                            axios.put(`https://6752a82ef3754fcea7b91e39.mockapi.io/users/${obj.id}`, {'email': email})
-                        }  else if(!email && name){
-                            axios.put(`https://6752a82ef3754fcea7b91e39.mockapi.io/users/${obj.id}`, {"name": name})
-                        } else if(password.length !== 0 && Repeatpassword.length !== 0 && password === Repeatpassword && password !== obj.password){
-                            axios.put(`https://6752a82ef3754fcea7b91e39.mockapi.io/users/${obj.id}`, {"password": password})
-                        }
-                    }
-                })
-            })
-            name && dispatch(nameSetSettings(name));
-            name && dispatch(emailSetSettings(email));
-            setEmail('');
-            setName('');
-            setPassword('');
-            setRepeatPassword('');
+    const SetNameAndEmailFunc = () => {
+        axios.get('https://6752a82ef3754fcea7b91e39.mockapi.io/users').then((res) => {
+            res.data.map(async (obj) => {
+                if(emailUser == obj.email){
+                    if(email && name && email.includes('@') && email.includes('.com') && email.includes('gmail') && email !== emailUser && name.length < 10){
+                        await axios.put(`https://6752a82ef3754fcea7b91e39.mockapi.io/users/${obj.id}`, {"name": name, 'email': email})
 
-            setSuccess(true);
-            setTimeout(() => {
-                setSuccess(false)
-            }, 3000)
-        } else{
-            setError(true);
-            setTimeout(() => {
-                setError(false);
-            }, 3000)
-        }
+                        dispatch(nameSetSettings(name));
+                        dispatch(emailSetSettings(email));
+                        setEmail('');
+                        setName('');
+                        setPassword('');
+                        setRepeatPassword('');
+
+                        setSuccess(true);
+                        setTimeout(() => {
+                            setSuccess(false)
+                        }, 3000)
+                    } else{
+                        setError(true);
+                        setTimeout(() => {
+                            setError(false);
+                        }, 3000)
+                    }
+                } 
+            })
+        })
+    }
+
+    const SetEmailFunc = () => {
+        axios.get('https://6752a82ef3754fcea7b91e39.mockapi.io/users').then((res) => {
+            res.data.map(async (obj) => {
+                if(emailUser == obj.email && obj.email !== email){
+                    if(email && !name &&  email.includes('@') && email.includes('.com') && email.includes('gmail') && email !== emailUser){
+                        await axios.put(`https://6752a82ef3754fcea7b91e39.mockapi.io/users/${obj.id}`, {'email': email});
+
+                        dispatch(emailSetSettings(email));
+                        setEmail('');
+                        setName('');
+                        setPassword('');
+                        setRepeatPassword('');
+
+                        setSuccess(true);
+                        setTimeout(() => {
+                            setSuccess(false)
+                        }, 3000)
+                    } else{
+                        setError(true);
+                        setTimeout(() => {
+                            setError(false);
+                        }, 3000)
+                    }
+                }
+            })
+        })
+    }
+
+    const SetNameFunc = () => {
+        axios.get('https://6752a82ef3754fcea7b91e39.mockapi.io/users').then((res) => {
+            res.data.map(async (obj) => {
+                if(emailUser == obj.email){
+                    if(!email && name && name.length < 10){
+                        await axios.put(`https://6752a82ef3754fcea7b91e39.mockapi.io/users/${obj.id}`, {"name": name})
+
+                        dispatch(nameSetSettings(name));
+                        setEmail('');
+                        setName('');
+                        setPassword('');
+                        setRepeatPassword('');
+
+                        setSuccess(true);
+                        setTimeout(() => {
+                            setSuccess(false)
+                        }, 3000)
+                    }
+                } else{
+                    setError(true);
+                    setTimeout(() => {
+                        setError(false);
+                    }, 3000)
+                }
+            })
+        })
+    }
+
+    const SetPasswordFunc = () => {
+        axios.get('https://6752a82ef3754fcea7b91e39.mockapi.io/users').then((res) => {
+            res.data.map(async (obj) => {
+                if(emailUser == obj.email){
+                    if(password && Repeatpassword && password === Repeatpassword && password !== obj.password){
+                        await axios.put(`https://6752a82ef3754fcea7b91e39.mockapi.io/users/${obj.id}`, {"password": password});
+
+                        setEmail('');
+                        setName('');
+                        setPassword('');
+                        setRepeatPassword('');
+
+                        setSuccess(true);
+                        setTimeout(() => {
+                            setSuccess(false)
+                        }, 3000)
+                    } else{
+                        setError(true);
+                        setTimeout(() => {
+                            setError(false);
+                        }, 3000)
+                    }
+                }
+            })
+        })
+    }
+
+    const setNameSettings = () => {
+        axios.get('https://6752a82ef3754fcea7b91e39.mockapi.io/users').then((res) => {
+            res.data.map((obj) => {
+                if(emailUser == obj.email){
+                    if(email && name && email.includes('@') && email.includes('.com') && email.includes('gmail') && email !== emailUser && name.length < 10){
+                        SetNameAndEmailFunc();
+                    } else if(email && !name && email.includes('@') && email.includes('.com') && email.includes('gmail') && email !== emailUser){
+                        SetEmailFunc();
+                    }  else if(!email && name && name.length < 10){
+                         SetNameFunc();
+                    } else if(password && Repeatpassword && password === Repeatpassword && password !== obj.password){
+                        SetPasswordFunc();
+                    }
+                }
+            })
+        })
     }
     
     return (

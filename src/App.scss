@@ -367,7 +367,12 @@ main{
             color: rgb(59 130 246);
             position: absolute;
             transform: translateY(-50px);
-            animation: show-up 1s;
+            animation: showOpacity2 auto linear;
+            animation-timeline: scroll();
+
+            @media screen and (max-width: 405px) {
+                animation: none;
+            }
         }
 
         .title{
@@ -375,7 +380,11 @@ main{
             font-size: 25px;
             transform: translateY(-17px);
             animation: show-rights 1s;
-            animation-timeline: scroll(root);
+            animation-timeline: scroll();
+            
+            @media screen and (max-width: 405px) {
+                animation: none;
+            }
 
             @media screen and (max-width: 300px) {
                font-size: 20px;
@@ -390,6 +399,12 @@ main{
             width: 700px;
             line-height: 25px;
             animation: bounse 1s;
+            animation: showOpacity2 auto linear;
+            animation-timeline: scroll();
+
+            @media screen and (max-width: 405px) {
+                animation: none;
+            }
 
             @media screen and (max-width: 850px) {
                 &{
@@ -517,9 +532,9 @@ main{
             color: #fff;
             margin-left: 125px;
             animation: more-right auto linear;
-            animation-timeline: scroll(root);
+            animation-timeline: scroll();
 
-            @media screen and (max-width: 475px) {
+            @media screen and (max-width: 900px) {
                 animation: none;
             }
         }
@@ -551,6 +566,8 @@ main{
             margin-bottom: 30px;
             transition: 0.7s;
             margin-right: 20px;
+            animation: showOpacity auto linear both;
+            animation-timeline: scroll();
 
             @media screen and (max-width: 475px) {
                 width: 300px;
@@ -562,6 +579,10 @@ main{
 
             @media screen and (max-width: 405px) {
                 width: 320px;
+            }
+
+            @media screen and (max-width: 900px) {
+                animation: none;
             }
 
             @media screen and (max-width: 890px) {
@@ -736,7 +757,7 @@ main{
                     margin-top: 15px;
                     transform: translate(-115px);
                     animation: show-right auto linear;
-                    animation-timeline: scroll(root);
+                    animation-timeline: scroll();
 
                     @media screen and (max-width: 975px) {
                         animation: none;
@@ -753,7 +774,7 @@ main{
                     margin-top: 45px;
                     margin-left: 10px;
                     animation: show-right auto linear;
-                    animation-timeline: scroll(root);
+                    animation-timeline: scroll();
 
                     @media screen and (max-width: 975px) {
                         animation: none;
@@ -767,7 +788,7 @@ main{
                     margin-top: 81px;
                     margin-left: 10px;
                     animation: show-right auto linear;
-                    animation-timeline: scroll(root);
+                    animation-timeline: scroll();
 
                     @media screen and (max-width: 975px) {
                         animation: none;
@@ -781,7 +802,7 @@ main{
                     margin-left: 70px;
                     text-decoration: line-through;
                     animation: show-down auto linear;
-                    animation-timeline: scroll(root);
+                    animation-timeline: scroll();
 
                     @media screen and (max-width: 975px) {
                         animation: none;
@@ -2663,9 +2684,13 @@ main{
 @keyframes showOpacity {
     from{
         opacity: 0;
+        margin-left: 5vw;
     }
+}
 
+@keyframes showOpacity2 {
     to{
-        opacity: 1;
+        opacity: 0;
+        margin-left: 5vw;
     }
 }

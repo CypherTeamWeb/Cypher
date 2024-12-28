@@ -10,36 +10,39 @@ export default function Login(){
     const [passwordValue, setPasswordValue] = useState('');
     const [isEng, setIsEng] = useState(true);
     const [isReg, setIsReg] = useState(false);
+    const [email, setEmail] = useState('');
     const redirect = useNavigate()
     
     const dispatch = useDispatch();
 
     const Registration = async () => {
-        if(emailValue.includes('@') && emailValue.includes('.') && emailValue.length > 6 && passwordValue.length > 6 && 
-        nameValue.length < 20) {   
-            let email = '';
-            isReg && axios.get('https://6752a82ef3754fcea7b91e39.mockapi.io/users').then((res) => {
-                res.data.map((obj) => {
-                    if(obj.email === emailValue){
-                        email = obj.email
-                    }
-             })
-           })
+        if(emailValue.includes('@') && emailValue.includes('.') && emailValue.length > 6 && passwordValue.length > 6) {   
+            if(isReg && nameValue.length < 20 && nameValue.length > 4){
+                isReg && await axios.get('https://6752a82ef3754fcea7b91e39.mockapi.io/users').then((res) => {
+                    res.data.map((obj) => {
+                        if(obj.email === emailValue){
+                            setEmail(false);
+                        }
+                    })
+                })
 
-            if(isReg && nameValue.length < 20 && nameValue.length > 4 && email !== emailValue){
-                await axios.post('https://6752a82ef3754fcea7b91e39.mockapi.io/users', {name: nameValue, password: passwordValue, email: emailValue})
-                dispatch(nameSetSettings(nameValue))  
-                dispatch(emailSetSettings(emailValue));
-                dispatch(isLoginset(true));
-                redirect('/');
-            } else{
-                isReg && alert('Error this user already exist')
+                if(!email){
+                    await axios.post('https://6752a82ef3754fcea7b91e39.mockapi.io/users', {name: nameValue, password: passwordValue, email: emailValue})
+                    dispatch(nameSetSettings(nameValue))  
+                    dispatch(emailSetSettings(emailValue));
+                    dispatch(isLoginset(true));
+                    redirect('/');
+                } else{
+                    isReg && alert('Error this user already exist.')
+                }
+            } else {
+                isReg && alert('Error incorrect data.')
             }
 
             if(!isReg){
                 axios.get('https://6752a82ef3754fcea7b91e39.mockapi.io/users').then((res) => {
                     res.data.map((obj) => {
-                        if(obj.email === emailValue && obj.password === passwordValue){
+                        if(!isReg && obj.email === emailValue && obj.password === passwordValue){
                             dispatch(nameSetSettings(obj.name))  
                             dispatch(emailSetSettings(emailValue));
                             dispatch(isLoginset(true));
@@ -52,6 +55,7 @@ export default function Login(){
             setEmailValue('')
             setNameValue('');
             setPasswordValue('');
+            
         } else {
             alert('Incorrectly entered data.');
             setEmailValue('')
