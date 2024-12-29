@@ -17,6 +17,25 @@ export default function SectionsOpen({title, onClose}){
     const emailUser = useSelector((state) => state.setting.email);
     const dispatch = useDispatch();
 
+    const isUserAlreadyExisted = () => {
+        axios.get('https://6752a82ef3754fcea7b91e39.mockapi.io/users').then(async (res) => {
+            let count = 0;
+            await res.data.forEach((obj) => {
+                if(obj.email == email){
+                    count++;
+                }
+            })
+
+            if(count == 0){
+                setNameSettings()
+            } else{
+                alert('This user already exist.');
+                setEmail('')
+                setName('');
+            }
+        })
+    }
+
     const SetNameAndEmailFunc = () => {
         axios.get('https://6752a82ef3754fcea7b91e39.mockapi.io/users').then((res) => {
             res.data.map(async (obj) => {
@@ -184,7 +203,7 @@ export default function SectionsOpen({title, onClose}){
 
             {title !== 'Privacy' && <div 
             style={{marginTop: title == 'Language' ? '130px' : '70px', display: title === 'Language' ? 'none' : 'block'}} 
-            className="Submit" onClick={() => title == 'Edit Profile' || title == 'Change Password' ? setNameSettings() : null}>Submit</div>}
+            className="Submit" onClick={() => isUserAlreadyExisted()}>Submit</div>}
         </>
     )
 }

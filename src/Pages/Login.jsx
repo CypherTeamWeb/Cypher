@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {Link, useNavigate} from 'react-router-dom'
 import { nameSetSettings, emailSetSettings, isLoginset } from "../redux/slices/settingSlice";
 import axios from 'axios';
@@ -11,7 +11,8 @@ export default function Login(){
     const [isEng, setIsEng] = useState(true);
     const [isReg, setIsReg] = useState(false);
     const redirect = useNavigate()
-    
+
+    const email = useSelector((state) => state.setting.email);
     const dispatch = useDispatch();
 
     const isUserAlreadyExisted = () => {
