@@ -10,33 +10,44 @@ export default function Login(){
     const [passwordValue, setPasswordValue] = useState('');
     const [isEng, setIsEng] = useState(true);
     const [isReg, setIsReg] = useState(false);
-    const [email, setEmail] = useState('');
     const redirect = useNavigate()
     
     const dispatch = useDispatch();
 
+    const isUserAlreadyExisted = () => {
+        axios.get('https://6752a82ef3754fcea7b91e39.mockapi.io/users').then(async (res) => {
+            let count = 0;
+            await res.data.forEach((obj) => {
+                if(obj.email == emailValue){
+                    count++;
+                }
+            })
+
+            if(count == 0){
+                Registration()
+            } else{
+                alert('This user already exist.');
+                setEmailValue('')
+                setNameValue('');
+                setPasswordValue('');
+            }
+        })
+    }
+
     const Registration = async () => {
         if(emailValue.includes('@') && emailValue.includes('.') && emailValue.length > 6 && passwordValue.length > 6) {   
             if(isReg && nameValue.length < 20 && nameValue.length > 4){
-                isReg && await axios.get('https://6752a82ef3754fcea7b91e39.mockapi.io/users').then((res) => {
-                    res.data.map((obj) => {
-                        if(obj.email === emailValue){
-                            setEmail(false);
-                        }
-                    })
-                })
-
-                if(!email){
-                    await axios.post('https://6752a82ef3754fcea7b91e39.mockapi.io/users', {name: nameValue, password: passwordValue, email: emailValue})
-                    dispatch(nameSetSettings(nameValue))  
-                    dispatch(emailSetSettings(emailValue));
-                    dispatch(isLoginset(true));
-                    redirect('/');
-                } else{
-                    isReg && alert('Error this user already exist.')
-                }
+                await axios.post('https://6752a82ef3754fcea7b91e39.mockapi.io/users', {name: nameValue, password: passwordValue, email: emailValue})
+                dispatch(nameSetSettings(nameValue))  
+                dispatch(emailSetSettings(emailValue));
+                dispatch(isLoginset(true));
+                redirect('/');
             } else {
-                isReg && alert('Error incorrect data.')
+                if(isReg && !email){
+                    alert('Error incorrect data.')
+                    setNameValue('');
+                    setPasswordValue('');
+                }
             }
 
             if(!isReg){
@@ -47,6 +58,11 @@ export default function Login(){
                             dispatch(emailSetSettings(emailValue));
                             dispatch(isLoginset(true));
                             redirect('/');
+                        } else{
+                            if(!isReg && !email){
+                                alert('Error incorrect data.');
+                                setPasswordValue('');
+                            }
                         }
                  })
                })
@@ -101,7 +117,7 @@ export default function Login(){
                 <div className="logiBackWrapper">
                     <Link to={'/'} className='LoginBack' style={{top: !isReg && '350px', marginTop: window.innerWidth <= 530 ? isReg && '40px' : '0'}}>{isEng ? "Back" : 'Назад'}</Link>
                 </div>
-                <div className="LoginSubmit" style={{top: !isReg && '350px'}} onClick={Registration} >{!isReg ? isEng ? 'Login' : 'Войти' : isEng ? 'Registration' : 'Регистрация'}</div>
+                <div className="LoginSubmit" style={{top: !isReg && '350px'}} onClick={isReg ? isUserAlreadyExisted : Registration} >{!isReg ? isEng ? 'Login' : 'Войти' : isEng ? 'Registration' : 'Регистрация'}</div>
            </div>
         </>
     )

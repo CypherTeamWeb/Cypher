@@ -945,7 +945,7 @@ main{
     margin-top: 80px;
     margin-left: 74%;
     overflow-x: hidden;
-    animation: showOpacity 0.6s;
+    animation: showOpacity3 0.6s;
 
     @media screen and (max-width: 1050px) {
         &{
@@ -1414,7 +1414,7 @@ main{
     margin-top: 85px;
     border-radius: 8px;
     padding-bottom: 160px;
-    animation: showOpacity 0.6s;
+    animation: showOpacity3 0.6s;
 
     @media screen and (max-width: 990px) {
         &{
@@ -2692,5 +2692,11 @@ main{
     to{
         opacity: 0;
         margin-left: 5vw;
+    }
+}
+
+@keyframes showOpacity3 {
+    from{
+        opacity: 0;
     }
 }

@@ -80,6 +80,26 @@ export default function Header(){
         inputDebounce(e.target.value)
     }
 
+    const isUserAlreadyExisted = () => {
+      axios.get('https://6752a82ef3754fcea7b91e39.mockapi.io/users').then(async (res) => {
+          let count = 0;
+          await res.data.forEach((obj) => {
+              if(obj.email == loginEmail){
+                  count++;
+              }
+          })
+
+          if(count == 0){
+              Login()
+          } else{
+              alert('This user already exist.');
+              setloginEmail('')
+              setLoginNickname('');
+              setLoginPassword('');
+          }
+      })
+  }
+
     const Login = async () => {
       if(loginEmail.includes('@') && loginEmail.includes('.') && loginEmail.length > 6 && loginPassword.length > 6 && 
         loginNickname.length < 20) {   
@@ -237,7 +257,7 @@ export default function Header(){
                       <input type="password" placeholder="Password" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} />
                       <a href="#" style={{marginLeft: isReg ? '200px' : '150px' }} onClick={() => setIsReg(!isReg)} className="setRegiser">{isReg ? 'Login' : 'Registration'}</a>
 
-                      <div className="Login" onClick={Login}>{isReg ? 'Registration' : 'Login'}</div>
+                      <div className="Login" onClick={isReg ? isUserAlreadyExisted : Login}>{isReg ? 'Registration' : 'Login'}</div>
                     </div>
                   }
 
