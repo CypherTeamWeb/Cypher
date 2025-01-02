@@ -3,8 +3,6 @@ import { useEffect, useState } from "react"
 import { itemsSet, wishlistSet } from "../redux/slices/itemsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import GamesJson from '../Configs/Games.json'
-
 
 export default function Card({price = '', title = '', imageUrl = '', company = '',sale = '',proccentSale = ''}){
     const [inFavorite, setInFavorite] = useState(false);

@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import Login from './Pages/Login';
 import { itemsSet, wishlistSet } from "./redux/slices/itemsSlice";
 import { useDispatch } from 'react-redux';
+import Library from './Pages/Library/Library';
 
 export default function App() {
   const isLogin = useSelector((state) => state.setting.isLogin);
@@ -33,6 +34,7 @@ export default function App() {
           <Route path='/' element={<Home />} />
           <Route path='/WorkTogether' element={<WorkTogether />} />
           <Route path='/Login' element={<Login />} />
+          <Route path='/Library' element={<Library />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
       </div>

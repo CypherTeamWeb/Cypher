@@ -30,12 +30,14 @@ export default function Header(){
     const [loginPassword, setLoginPassword] = useState('');
     const [loginEmail, setloginEmail] = useState('');
     const [isReg, setIsReg] = useState(false);
+    const [isOredered, setIsOrdered] = useState(false);
 
     const isLogin = useSelector((state) => state.setting.isLogin)
     const item = useSelector((state) => state.items.value);
     const WishlistItems = useSelector((state) => state.items.wishlist);
     const lang = useSelector((state) => state.setting.value);
     const email = useSelector((state) => state.setting.email);
+    const Orderitems = useSelector((state) => state.items.orderItems);
 
     const dispatch = useDispatch();
 
@@ -62,14 +64,69 @@ export default function Header(){
     setSectionsOpen('');
    }
 
+   const closeCartHeader = () => {
+    serCartOpen(!CartOpen);
+    setUserOpen(false);
+    setWishListOpen(false);
+    setIsOrdered(false)
+  }
+
+  const deleteAllOrderItems = () => {
+    axios.get('https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/CypherCartJson').then(async (res) => {
+      let cart = res.data.filter((obj) => obj.email == email);
+
+      await cart.map(async (obj) => {
+        await axios.delete(`https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/CypherCartJson/${obj.id}`)
+      })
+
+      dispatch(itemsSet([]))
+    })
+  }
+
+   const completeOrder = async () => {
+       let count = 0;
+
+       await item.map(async (obj) => {
+        await Orderitems.map((orderObj) => {
+         if(obj.title == orderObj.title){
+           count++;
+         }
+          })
+       })
+
+        
+        if(count == 0){
+          item.map(async (obj) => {
+            setIsOrdered(true);
+
+            let title = obj.title;
+            let price = obj.price;
+            let company = obj.company;
+            let imageUrl = obj.imageUrl;
+            let email = obj.email;
+            
+            await axios.post('https://6752a82ef3754fcea7b91e39.mockapi.io/Library', {title, price, company, imageUrl, email});
+            deleteAllOrderItems()
+          })
+        } else{
+          alert('You already buy one of this items.');
+        }
+   }
+
    const DeleteItem = async (id) => {
       let cart = [];
+      
       await axios.delete(`https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/CypherCartJson/${id}`)
       await axios.get('https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/CypherCartJson').then(async (res) => {
         cart = res.data.filter((obj) => obj.email === email);
         dispatch(itemsSet(cart))
-    })
+      })
   }
+
+    const closeCart = () => {
+      serCartOpen(false);
+      setIsOrdered(false);
+    }
 
     const settingsOnclick = (title) => {
         setSectionsOpen(title);
@@ -160,7 +217,7 @@ export default function Header(){
               <div className="navigation" style={{display: menuOpen && 'flex', flexDirection: menuOpen ? 'column' : 'row', marginTop: menuOpen && '70px'}}>
                 <a href="#Featured-games" style={{transform: menuOpen ? 'translate(100px,50px)' : ''}}
                 >{lang === 'Русский' ? 'Магазин' : 'Store'}</a>
-                <Link to="#" style={{transform: menuOpen ? 'translate(100px,20px)' : ''}}>
+                <Link to="/Library" style={{transform: menuOpen ? 'translate(100px,20px)' : ''}}>
                   {lang === 'Русский' ? 'Библиотека' :'Library'}</Link>
                 <Link to="/WorkTogether" className="WorkA" style={{transform: menuOpen ? 'translate(100px,-10px)' : ''}}>
                   {lang === 'Русский' ? 'Хотите присоединиться к нашей команде?' : 'Wanna work together?'}</Link>
@@ -179,7 +236,7 @@ export default function Header(){
                 </svg>}
               </div>
 
-                <div className="Cart" onClick={() => {serCartOpen(!CartOpen); setUserOpen(false); setWishListOpen(false)}}>
+                <div className="Cart" onClick={closeCartHeader}>
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                       stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" ><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1">
                     </circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg>
@@ -192,13 +249,13 @@ export default function Header(){
           </div>
 
           {CartOpen && 
-            <div className="ShoppingCart">
-              {<ShoppingCartTopSection Close={() => serCartOpen(false)} />}
+            <div className="ShoppingCart" style={{paddingBottom: isOredered && '310px'}}>
+              {!isOredered && <ShoppingCartTopSection Close={closeCart} />}
 
-              {!item.length ? <EmptyCart /> : null}
+              {!item.length && !isOredered ? <EmptyCart /> : null}
 
               {item.length ? 
-                <div className="cart">
+                <div className="cart" style={{display: isOredered && 'none'}}>
                   {item
                     .map((obj, index) => (
                       <>
@@ -213,11 +270,24 @@ export default function Header(){
                       <p>{lang === 'Русский' ? 'Всего' :'Total'}:</p><span>${price}</span>
                     </div>
 
-                    <div className="CheckOut">{lang === 'Русский' ? 'Купить' :'Checkout'}</div>
+                    <div className="CheckOut" onClick={completeOrder} >{lang === 'Русский' ? 'Купить' :'Checkout'}</div>
                   </div>
-                  
+
                 </div>
              : null }
+
+              {isOredered ?
+                    <div className="OrederWrapper">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" viewBox="0 0 16 16">
+                          <path d="M12.354 4.354a.5.5 0 0 0-.708-.708L5 10.293 1.854 7.146a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0zm-4.208 7-.896-.897.707-.707.543.543 6.646-6.647a.5.5 0 0 1 .708.708l-7 7a.5.5 0 0 1-.708 0" fill="rgb(8, 255, 8)"/>
+                          <path d="m5.354 7.146.896.897-.707.707-.897-.896a.5.5 0 1 1 .708-.708"/>
+                      </svg>
+                      <h1>{lang === 'Русский' ? 'Заказ оформлен' : 'Order completed'}</h1>
+
+                      <Link to={'/Library'} onClick={closeCart} className="backOreder">{lang === 'Русский' ? 'Перейти в библиотеку' : 'Go to the library'}</Link>
+                    </div>
+                  : null}
+
             </div>
           }
 
