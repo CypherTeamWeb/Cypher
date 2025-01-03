@@ -202,8 +202,8 @@ export default function Header(){
 
     const MenuOpen = () => {
       setMenuOpen(!menuOpen);
-      menuOpen && setUserOpen(false);
-      menuOpen && serCartOpen(false);
+      setUserOpen(false);
+      serCartOpen(false);
     }
 
     const SingOut = () => {

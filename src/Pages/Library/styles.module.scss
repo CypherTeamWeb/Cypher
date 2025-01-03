@@ -78,6 +78,14 @@
             width: 330px;
         }
 
+        @media screen and (max-width: 355px) {
+            width: 300px;
+        }
+
+        @media screen and (max-width: 325px) {
+            width: 260px;
+        }
+
         &:hover {
             scale: 1.05;
         }
@@ -112,6 +120,14 @@
             @media screen and (max-width: 400px) {
                 width: 330px;
             }
+
+            @media screen and (max-width: 355px) {
+                width: 300px;
+            }
+
+            @media screen and (max-width: 325px) {
+                width: 260px;
+            }
         }
 
         .description{
@@ -141,6 +157,14 @@
 
             @media screen and (max-width: 400px) {
                 width: 330px;
+            }
+
+            @media screen and (max-width: 355px) {
+                width: 300px;
+            }
+
+            @media screen and (max-width: 325px) {
+                width: 260px;
             }
 
             h4{
@@ -186,6 +210,14 @@
 
                 @media screen and (max-width: 400px) {
                     margin-left: 270px;
+                }
+
+                @media screen and (max-width: 355px) {
+                    margin-left: 250px;
+                }
+
+                @media screen and (max-width: 325px) {
+                    margin-left: 210px;
                 }
 
                 &:hover svg{
