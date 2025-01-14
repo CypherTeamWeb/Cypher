@@ -2212,6 +2212,18 @@ main{
         @media screen and (max-width: 650px) {
             width: 239%;
         }
+
+        @media screen and (max-width: 550px) {
+            width: 230%;
+        }
+
+        @media screen and (max-width: 430px) {
+            width: 226%;
+        }
+
+        @media screen and (max-width: 380px) {
+            width: 224%;
+        }
     }
     
     .background{
