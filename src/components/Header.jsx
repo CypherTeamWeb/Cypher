@@ -10,6 +10,7 @@ import CardInWishList from "./CardInWishList";
 import {SettingsSections} from '../Configs/Settings'
 import SectionsOpenpage from "./SectionsOpen";
 import debounce from 'lodash.debounce'
+import { fetchItems } from "../redux/slices/itemsSlice";
 
 // redux import
 import {useDispatch, useSelector} from 'react-redux';
@@ -18,7 +19,7 @@ import { valueSet } from "../redux/slices/valueSlice";
 import { nameSetSettings, emailSetSettings, isLoginset } from "../redux/slices/settingSlice";
 
 export default function Header(){
-    const [CartOpen, serCartOpen] = useState(false);
+    const [CartOpen, setCartOpen] = useState(false);
     const [price, setPrice] = useState(0);
     const [UserOpen, setUserOpen] = useState(false);
     const [WishListOpen, setWishListOpen] = useState(false);
@@ -58,41 +59,45 @@ export default function Header(){
 
    const UserOnClick = () => {
     setUserOpen(!UserOpen);
-    serCartOpen(false);
+    setCartOpen(false);
     setWishListOpen(false); 
     setSettingsOpen(false);
     setSectionsOpen('');
    }
 
    const closeCartHeader = () => {
-    serCartOpen(!CartOpen);
+    setCartOpen(!CartOpen);
     setUserOpen(false);
     setWishListOpen(false);
     setIsOrdered(false)
   }
 
   const deleteAllOrderItems = () => {
-    axios.get('https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/CypherCartJson').then(async (res) => {
-      let cart = res.data.filter((obj) => obj.email == email);
-
-      await cart.map(async (obj) => {
-        await axios.delete(`https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/CypherCartJson/${obj.id}`)
+    try{
+      axios.get('https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/CypherCartJson').then(async (res) => {
+        let cart = res.data.filter((obj) => obj.email == email);
+  
+        await cart.map(async (obj) => {
+          await axios.delete(`https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/CypherCartJson/${obj.id}`)
+        })
+  
+        dispatch(itemsSet([]))
       })
-
-      dispatch(itemsSet([]))
-    })
+    } catch (e){
+      console.error('Error', e);
+    }
   }
 
    const completeOrder = async () => {
        let count = 0;
 
-       await item.map(async (obj) => {
-        await Orderitems.map((orderObj) => {
-         if(obj.title == orderObj.title){
-           count++;
-         }
+        await item.map(async (obj) => {
+          await Orderitems.map((orderObj) => {
+            if(obj.title == orderObj.title){
+              count++;
+            }
           })
-       })
+        })
 
         
         if(count == 0){
@@ -105,8 +110,12 @@ export default function Header(){
             let imageUrl = obj.imageUrl;
             let email = obj.email;
             
-            await axios.post('https://6752a82ef3754fcea7b91e39.mockapi.io/Library', {title, price, company, imageUrl, email});
-            deleteAllOrderItems()
+            try{
+              await axios.post('https://6752a82ef3754fcea7b91e39.mockapi.io/Library', {title, price, company, imageUrl, email});
+              deleteAllOrderItems()
+            } catch (e) {
+                console.error('Error', e);
+            }
           })
         } else{
           alert('You already buy one of this items.');
@@ -114,17 +123,15 @@ export default function Header(){
    }
 
    const DeleteItem = async (id) => {
-      let cart = [];
-      
       await axios.delete(`https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/CypherCartJson/${id}`)
-      await axios.get('https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/CypherCartJson').then(async (res) => {
-        cart = res.data.filter((obj) => obj.email === email);
-        dispatch(itemsSet(cart))
-      })
+      dispatch(fetchItems({
+        email,
+        url: 'https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/CypherCartJson'
+    }))
   }
 
     const closeCart = () => {
-      serCartOpen(false);
+      setCartOpen(false);
       setIsOrdered(false);
     }
 
@@ -154,6 +161,8 @@ export default function Header(){
               setLoginNickname('');
               setLoginPassword('');
           }
+      }).catch((e) => {
+        console.error('Error', e)
       })
   }
 
@@ -203,11 +212,12 @@ export default function Header(){
     const MenuOpen = () => {
       setMenuOpen(!menuOpen);
       setUserOpen(false);
-      serCartOpen(false);
+      setCartOpen(false);
     }
 
     const SingOut = () => {
-      dispatch(isLoginset(false));
+      const ConfirmSingOut = confirm(lang == 'Русский' ? 'Вы уверенны что хотите выйти?' : 'Are you sure you want to sign out?')
+      ConfirmSingOut && dispatch(isLoginset(false));
     }
 
     return (

@@ -3,8 +3,7 @@ import {Link} from 'react-router-dom';
 import CardInLibrary from './CardInLibrary';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import axios from 'axios';
-import { orderItemsSet } from '../../redux/slices/itemsSlice';
+import { fetchItems } from '../../redux/slices/itemsSlice';
 
 export default function Library(){
     const email = useSelector((state) => state.setting.email);
@@ -14,11 +13,10 @@ export default function Library(){
     const dispatch = useDispatch();
 
     useEffect(() => {
-        axios.get('https://6752a82ef3754fcea7b91e39.mockapi.io/Library').then((res) => {
-            let cart = [];
-            cart = res.data.filter((obj) => obj.email == email);
-            dispatch(orderItemsSet(cart));
-        })
+        dispatch(fetchItems({
+            email,
+            url: 'https://6752a82ef3754fcea7b91e39.mockapi.io/Library'
+        }))
     }, [])
 
     return (

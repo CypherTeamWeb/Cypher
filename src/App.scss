@@ -2195,8 +2195,9 @@ main{
 
 .LoginPageWrapper{
     position: absolute;
+    left: 50%;
     top: 25%;
-    transform: translateY(-50%);
+    transform: translate(-50%,-50%);
     z-index: 1;
     
     .bacground-image{
@@ -2206,22 +2207,7 @@ main{
         z-index: -100;
         top: -190px;
         overflow: hidden !important;
-
-        @media screen and (max-width: 500px) {
-            width: 180% !important;
-        }
-
-        @media screen and (max-width: 470px) {
-            width: 190% !important;
-        }
-
-        @media screen and (max-width: 410px) {
-            width: 210% !important;
-        }
-
-        @media screen and (max-width: 380px) {
-            width: 212% !important;
-        }
+        left: -120%;
     }
     
     .background{
@@ -2232,47 +2218,55 @@ main{
         overflow: hidden;
     }
 
-    @media screen and (max-width: 1114px) {
-        left: -200px;
-    }
-
-    @media screen and (max-width: 915px) {
-        left: -300px;
-    }
-
     .SetRegistration{
         position: absolute;
         margin-top: 130px;
-        margin-left: 900px;
+        margin-left: 400px;
         cursor: pointer;
         user-select: none;
 
-        @media screen and (max-width: 690px) {
-            margin-left: 800px;
+        @media screen and (max-width: 520px) {
+            margin-left: 380px;
         }
 
-        @media screen and (max-width: 600px) {
-            margin-left: 700px;
+        @media screen and (max-width: 498px) {
+            margin-left: 350px;
         }
 
-        @media screen and (max-width: 490px) {
-            margin-left: 600px;
+        @media screen and (max-width: 445px) {
+            margin-left: 310px;
         }
 
-        @media screen and (max-width: 390px) {
-            margin-left: 550px;
+        @media screen and (max-width: 408px) {
+            margin-left: 270px;
+        }
+
+        @media screen and (max-width: 365px) {
+            margin-left: 240px;
         }
 
         @media screen and (max-width: 340px) {
-            margin-left: 510px;
+            margin-left: 220px;
         }
     }
 
     .LoginTitle{
         color: #fff;
         position: absolute;
-        margin-left: 350px;
+        margin-left: -70px;
         margin-top: 60px;
+
+        @media screen and (max-width: 600px) {
+            margin-left: -40px;
+        }
+
+        @media screen and (max-width: 540px) {
+            margin-left: -20px;
+        }
+
+        @media screen and (max-width: 480px) {
+            margin-left: -0px;
+        }
     }
 
     .inputWrapper{
@@ -2302,30 +2296,13 @@ main{
         width: 25px;
         position: absolute;
         height: 25px;
-        left: 500px;
-        margin-left: 10px;
+        margin-left: 15px;
         transition: none;
         z-index: 100;
         pointer-events: none;
 
-        @media screen and (max-width: 645px) {
-            left: 405px;
-        }
-
-        @media screen and (max-width: 555px) {
-            left: 355px;
-        }
-
         @media screen and (max-width: 500px) {
-            left: 330px;
-        }
-
-        @media screen and (max-width: 465px) {
-            left: 340px;
-        }
-
-        @media screen and (max-width: 340px) {
-            left: 335px;
+            margin-left: 25px;
         }
     }
 
@@ -2339,50 +2316,33 @@ main{
         color: #fff;
         position: relative;
         top: 150px;
-        left: 500px;
         transition: 0.5s;
         border: 2px solid rgb(59 130 246);
         margin-bottom: 30px;
-        padding-left: 40px;
+        padding-left: 50px;
 
-        @media screen and (max-width: 650px) {
-            left: 405px;
-        }
-
-        @media screen and (max-width: 555px) {
-            left: 360px;
-        }
-
-        @media screen and (max-width: 505px) {
-            left: 325px;
-        }
-
-        @media screen and (max-width: 473px) {
+        @media screen and (max-width: 500px) {
             width: 359px;
             margin-left: 10px;
         }
 
-        @media screen and (max-width: 450px) {
+        @media screen and (max-width: 445px) {
             width: 320px;
-            margin-left: 15px;
         }
 
-        @media screen and (max-width: 410px) {
+        @media screen and (max-width: 400px) {
             width: 280px;
         }
 
-        @media screen and (max-width: 370px) {
+        @media screen and (max-width: 355px) {
             width: 250px;
         }
 
-        @media screen and (max-width: 340px) {
-            width: 240px;
-            margin-left: 5px;
+        @media screen and (max-width: 320px) {
+            width: 230px;
         }
         
         
-        
-
         &::placeholder{
             color: #fff;
             transition: 0.5s;
@@ -2401,46 +2361,18 @@ main{
     .eng{
         position: absolute;
         display: flex;
-        margin-left: 220%;
+        margin-left: 100%;
         margin-top: 75px;
         color: #fff;
         cursor: pointer;
         user-select: none;
 
-        @media screen and (max-width: 712px) {
-            margin-left: 920px;
+        @media screen and (max-width: 520px) {
+            margin-left: 93%;
         }
 
-        @media screen and (max-width: 650px) {
-            margin-left: 830px;
-        }
-
-        @media screen and (max-width: 560px) {
-            margin-left: 750px;
-        }
-
-        @media screen and (max-width: 485px) {
-            margin-left: 720px;
-        }
-
-        @media screen and (max-width: 455px) {
-            margin-left: 680px;
-        }
-
-        @media screen and (max-width: 415px) {
-            margin-left: 650px;
-        }
-
-        @media screen and (max-width: 385px) {
-            margin-left: 625px;
-        }
-
-        @media screen and (max-width: 385px) {
-            margin-left: 590px;
-        }
-
-        @media screen and (max-width: 325px) {
-            margin-left: 560px;
+        @media screen and (max-width: 365px) {
+            margin-left: 88%;
         }
         
         p{
@@ -2474,35 +2406,27 @@ main{
         text-align: center;
         line-height: 45px;
         cursor: pointer;
-        left: 85%;
+        left: -30%;
         top: 400px;
 
-        @media screen and (max-width: 530px) {
+        @media screen and (max-width: 815px) {
+            left: -20%;
+        }
+
+        @media screen and (max-width: 700px) {
+            left: -15%;
+        }
+
+        @media screen and (max-width: 615px) {
+            left: -10%;
+        }
+
+        @media screen and (max-width: 545px) {
             top: 440px !important;
-            left: 105%;
+            left: 50%;
+            transform: translate(-50%);
         }
 
-        @media screen and (max-width: 500px) {
-            left: 100%;
-        }
-
-        @media screen and (max-width: 450px) {
-            left: 435px;
-        }
-
-        @media screen and (max-width: 415px) {
-            left: 410px;
-        }
-
-        @media screen and (max-width: 380px) {
-            left: 390px;
-        }
-
-        @media screen and (max-width: 330px) {
-            left: 370px;
-        }
-    
-    
         &:hover{
             opacity: 0.7;
         }
@@ -2519,45 +2443,26 @@ main{
         text-align: center;
         line-height: 45px;
         cursor: pointer;
-        left: 205%;
+        left: 85%;
         top: 400px; 
         transition: 0.5s;
         border: 2px solid rgb(59 130 246);
 
         @media screen and (max-width: 815px) {
-            left: 180%;
+            left: 75%;
         }
 
         @media screen and (max-width: 700px) {
-            left: 160%;
+            left: 70%;
         }
 
         @media screen and (max-width: 615px) {
-            left: 140%;
+            left: 65%;
         }
 
-        @media screen and (max-width: 530px) {
-            left: 105%;
-        }
-
-        @media screen and (max-width: 500px) {
-            left: 100%;
-        }
-
-        @media screen and (max-width: 450px) {
-            left: 435px;
-        }
-
-        @media screen and (max-width: 415px) {
-            left: 410px;
-        }
-
-        @media screen and (max-width: 380px) {
-            left: 390px;
-        }
-
-        @media screen and (max-width: 330px) {
-            left: 370px;
+        @media screen and (max-width: 545px) {
+            left: 50%;
+            transform: translate(-50%);
         }
 
         &:hover{

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { itemsSet, wishlistSet } from "../redux/slices/itemsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { fetchItems } from "../redux/slices/itemsSlice";
 
 export default function Card({price = '', title = '', imageUrl = '', company = '',sale = '',proccentSale = ''}){
     const [inFavorite, setInFavorite] = useState(false);
@@ -52,12 +53,11 @@ export default function Card({price = '', title = '', imageUrl = '', company = '
 
             inCart && res.data.forEach(async (obj) => {
                 if(obj.email == email && obj.title == title){
-                    let cart = [];
                     await axios.delete(`https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/CypherCartJson/${obj.id}`)
-                    await axios.get('https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/CypherCartJson').then(async (res) =>{
-                        cart = res.data.filter((obj) => obj.email == email)
-                        dispatch(itemsSet(cart))
-                    })
+                    dispatch(fetchItems({
+                        email,
+                        url: 'https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/CypherCartJson'
+                    }))
                 }
             })
         })
@@ -75,12 +75,11 @@ export default function Card({price = '', title = '', imageUrl = '', company = '
 
             inFavorite && res.data.forEach(async (obj) => {
                 if(obj.email == email && obj.title == title){
-                    let cart = [];
                     await axios.delete(`https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/Wishlist/${obj.id}`)
-                    await axios.get('https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/Wishlist').then(async (res) =>{
-                        cart = res.data.filter((obj) => obj.email == email)
-                        dispatch(wishlistSet(cart))
-                    })
+                    dispatch(fetchItems({
+                        email,
+                        url: 'https://67191cfb7fc4c5ff8f4c7d72.mockapi.io/Wishlist'
+                    }))
                 }
             })
         })
