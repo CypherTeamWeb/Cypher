@@ -2208,6 +2208,10 @@ main{
         top: -190px;
         overflow: hidden !important;
         left: -120%;
+
+        @media screen and (max-width: 650px) {
+            width: 239%;
+        }
     }
     
     .background{
