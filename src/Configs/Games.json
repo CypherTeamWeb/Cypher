@@ -4,23 +4,30 @@
         "price": 59.99,
         "ImageUrl" : "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800",
         "company": "CD Projekt Red",
-        "sale": [true, 74.99],
-        "proccentSale": [true, -20]
+        "sale": 74.99,
+        "proccentSale": -20,
+        "description": "The game features a richly detailed world filled with diverse districts, each brimming with life, culture, and danger. Players can engage in a variety of missions, from combat and hacking to stealth and dialogue-driven choices, shaping the narrative and V's relationships with a wide range of characters, including iconic figures like Johnny Silverhand, played by Keanu Reeves.With its immersive storytelling, stunning visuals, and deep character customization, 'Cyberpunk 2077' explores themes of identity, power, and the consequences of technological advancement. Players can forge their own path in a vibrant yet treacherous world, where every decision influences their journey through the chaotic streets of Night City.",
+        "id": 0,
+        "images": ["https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800", "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=800", "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?auto=format&fit=crop&w=800"]
     },
     {
         "title": "Elden Ring",
         "price": 69.99,
         "ImageUrl" : "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=800",
         "company": "FromSoftware",
-        "sale": [false],
-        "proccentSale": [false]
+        "description": "The game features a vast open world filled with intricate lore, challenging enemies, and formidable bosses. Players can explore diverse environments, from sprawling plains to dark dungeons, while utilizing a mix of melee, magic, and ranged combat. The game emphasizes player freedom, allowing for a variety of playstyles through deep character customization and skill progression. With its stunning visuals, haunting soundtrack, and the collaboration of renowned author George R.R. Martin for its world-building, 'Elden Ring' offers an unforgettable experience that challenges players to confront their fears and forge their own destinies in a beautifully crafted, yet unforgiving, fantasy realm.",
+        "id": 1,
+        "images": ["https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=800", "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800", "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?auto=format&fit=crop&w=800"]
     },
     {
         "title": "Red Dead Redemption 2",
         "price": 49.99,
         "ImageUrl" : "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?auto=format&fit=crop&w=800",
         "company": "Rockstar Games",
-        "sale": [true, 74.61],
-        "proccentSale": [true, -33]
+        "sale": 74.61,
+        "proccentSale": -33,
+        "description": "The game offers a vast and varied landscape, from rugged mountains and dense forests to bustling towns and sweeping plains. Players engage in a mix of gunfights, horseback riding, and exploration, while making moral choices that impact the story and the gang's fate. With its stunning visuals, deep narrative, and intricate character development, 'Red Dead Redemption 2' explores themes of loyalty, survival, and the changing nature of the Wild West. The game's attention to detail, including realistic wildlife behavior and a dynamic weather system, creates a living world that draws players into an unforgettable experience filled with adventure, betrayal, and redemption.",
+        "id": 2,
+        "images": ["https://images.unsplash.com/photo-1552820728-8b83bb6b773f?auto=format&fit=crop&w=800", "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=800" , "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800"]
     }
 ]

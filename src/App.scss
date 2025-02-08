@@ -1179,13 +1179,13 @@ main{
     }
 
     .Close{
-        color: gray;
         cursor: pointer;
         transform: translateY(-38px);
         margin-left: 230px;
+        color: #c1c0c09c;
 
         &:hover{
-            color: #fff;
+            opacity: 0.7;
         }
     }
 
@@ -1677,6 +1677,11 @@ main{
         cursor: pointer;
         transition: 0.5s;
         padding: 5px 5px 5px;
+        color: #c1c0c09c;
+
+        &:hover{
+            opacity: 0.7;
+        }
     }
 }
 
@@ -2425,6 +2430,10 @@ main{
         left: -30%;
         top: 400px;
 
+        @media screen and (max-width: 530px) {
+            margin-top: 40px;
+        }
+
         @media screen and (max-width: 815px) {
             left: -20%;
         }
@@ -2589,6 +2598,307 @@ main{
 
     .orderEmptyH1{
         color: #fff;
+    }
+}
+
+.CloseUserTopSection{
+    position: absolute;
+    left: 90%;
+    margin-top: 10px;
+    color: #c1c0c09c;
+    cursor: pointer;
+
+    &:hover{
+        opacity: 0.7;
+    }
+}
+
+.FullCard{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .Back{
+        position: absolute;
+        left: 60px;
+        color: #fff;
+        border: none;
+        text-decoration: none;
+        top: 10px;
+    }
+
+    .swiperWrapper{
+        user-select: none;
+        margin-left: -1280px;
+
+        @media screen and (max-width: 1480px) {
+            margin-left: -1150px;
+        }
+
+        @media screen and (max-width: 1200px) {
+            margin-left: -1100px;
+        }
+
+        @media screen and (max-width: 1150px) {
+            margin-left: -1050px;
+        }
+
+        @media screen and (max-width: 1105px) {
+            margin-left: -1020px;
+        }
+
+        svg{
+            cursor: pointer;
+        }
+
+        .SwiperRight{
+            position: absolute;
+            transform: rotate(180deg);
+            top: 370px;
+            margin-left: 630px;
+
+            @media screen and (max-width: 1480px) {
+                margin-left: 610px;
+            }
+
+            @media screen and (max-width: 1200px) {
+                margin-left: 570px;
+            }
+
+            @media screen and (max-width: 1070px) {
+                margin-left: 820px;    
+            }
+
+            @media screen and (max-width: 690px) {
+                margin-left: 800px;
+            }
+
+            @media screen and (max-width: 625px) {
+                margin-left: 780px;
+            }
+
+            @media screen and (max-width: 580px) {
+                margin-left: 750px;
+            }
+
+            @media screen and (max-width: 530px) {
+                margin-left: 720px;
+            }
+            
+            @media screen and (max-width: 467px) {
+                margin-left: 700px;
+            }
+
+            @media screen and (max-width: 420px) {
+                margin-left: 680px;
+            }
+
+            @media screen and (max-width: 370px) {
+                margin-left: 650px;
+            }
+        }
+
+        .SwiperLeft{
+            position: absolute;
+            margin-left: -50px;
+            top: 370px;
+
+            @media screen and (max-width: 1480px) {
+                margin-left: -20px;
+            }
+
+            @media screen and (max-width: 1070px) {
+                margin-left: 180px;    
+            }
+
+            @media screen and (max-width: 690px) {
+                margin-left: 210px;
+            }
+
+            @media screen and (max-width: 625px) {
+                margin-left: 235px;
+            }
+            
+            @media screen and (max-width: 580px) {
+                margin-left: 255px;
+            }
+
+            @media screen and (max-width: 530px) {
+                margin-left: 290px;
+            }
+
+            @media screen and (max-width: 467px) {
+                margin-left: 315px;
+            }
+
+            @media screen and (max-width: 420px) {
+                margin-left: 340px;
+            }
+            
+            @media screen and (max-width: 370px) {
+                margin-left: 365px;
+            }
+        }
+    }
+
+    img{
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%);
+        width: 600px;
+        border-radius: 20px;
+        height: 500px;
+        transition: 0.5s;
+        animation: showOpacity3 1s;
+
+        @media screen and (max-width: 1200px) {
+            width: 550px;
+        }
+
+        @media screen and (max-width: 1070px) {
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        @media screen and (max-width: 1070px) {
+            width: 600px;    
+        }
+        
+        @media screen and (max-width: 690px) {
+           width: 550px;
+        }
+
+        @media screen and (max-width: 625px) {
+            width: 500px;
+        }
+
+        @media screen and (max-width: 580px) {
+            width: 450px;
+        }
+
+        @media screen and (max-width: 580px) {
+            width: 400px;
+            height: 450px;
+        }
+
+        @media screen and (max-width: 467px) {
+            width: 350px;
+            height: 400px;
+        }
+
+        @media screen and (max-width: 420px) {
+            width: 300px;
+            height: 350px;
+        }
+
+        @media screen and (max-width: 375px) {
+            width: 250px;
+            height: 300px;
+        }
+    }
+
+    .info{
+        width: 800px;
+        height: 1493px;
+        margin-left: 700px;
+        position: absolute;
+        z-index: -2;
+
+        @media screen and (max-width: 1155px) {
+            margin-left: 600px;
+        }
+
+        @media screen and (max-width: 1070px) {
+            left: 50%; 
+            margin-left: 0;
+            transform: translate(-50%);
+            top: -200px;
+            border-top: 1px solid red;
+        }
+
+        h1{
+            position: absolute;
+            color: #fff;
+            top: 58%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+
+            @media screen and (max-width: 380px) {
+                width: 330px;
+                text-align: center;
+            }
+
+            @media screen and (max-width: 420px) {
+                top: 55%;
+            }
+        }
+        h3{
+            position: absolute;
+            color: #fff;
+            top: 83%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+
+            @media screen and (max-width: 420px) {
+                top: 86%;
+            }
+        }
+    
+        p{
+            position: absolute;
+            color: #fff;
+            top: 71%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            text-align: center;
+            font-weight: 100;
+            font-size: 17px;
+            line-height: 22px;
+
+            @media screen and (max-width: 1205px) {
+                width: 450px;
+            }
+
+            @media screen and (max-width: 460px) {
+                width: 400px;
+            }
+
+            @media screen and (max-width: 405px) {
+                width: 300px;
+            }
+        }
+
+        .AddToCart{
+            position: absolute;
+            top: 88%;
+            color: #fff;
+            width: 300px;
+            height: 50px;
+            background-color: rgb(22, 99, 71);
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            user-select: none;
+            line-height: 50px;
+            transition: 0.5s;
+            left: 50%;
+            transform: translate(-50%);
+
+            svg{
+                margin-left: 15px;
+            }
+
+            @media screen and (max-width: 420px) {
+                top: 90%;
+            }
+
+            &:hover{
+                opacity: 0.7;
+            }
+        }
     }
 }
 
