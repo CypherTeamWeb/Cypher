@@ -120,9 +120,7 @@ const Card: React.FC<CardType> = ({price, title, imageUrl , company ,sale , proc
                         </div>
                     </Link>
                     <div className="description">
-                        <Link to={`/Card/${id}`}>
-                            <h4 className="title">{title}</h4>
-                        </Link>
+                        <h4 className="title">{title}</h4>
                         <p className="Comporation">{company}</p>
                         <div className="price">${price}</div>
                         <div className="sale">{sale && '$' + sale}</div>
