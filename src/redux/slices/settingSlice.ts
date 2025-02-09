@@ -5,6 +5,7 @@ interface SettingState {
     name: string;
     email: string;
     isLogin: boolean;
+    loading: boolean
 }
 
 const initialState: SettingState = {
@@ -12,6 +13,7 @@ const initialState: SettingState = {
     name: 'Guest User',
     email: 'guest@example.com',
     isLogin: false,
+    loading: false,
 }
 
 const settingSlice = createSlice({
@@ -30,8 +32,11 @@ const settingSlice = createSlice({
         isLoginset: (state, action) => {
             state.isLogin = action.payload
         },
+        loadingSet: (state, action) => {
+            state.loading = action.payload
+        },
     },
 });
 
-export const {valueSetSettings, nameSetSettings, emailSetSettings, isLoginset} = settingSlice.actions;
+export const {valueSetSettings, nameSetSettings, emailSetSettings, isLoginset, loadingSet} = settingSlice.actions;
 export default settingSlice.reducer;

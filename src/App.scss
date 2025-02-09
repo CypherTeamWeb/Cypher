@@ -2813,15 +2813,30 @@ main{
     }
 
     .info{
-        width: 800px;
+        width: 755px;
         height: 1493px;
         margin-left: 700px;
         position: absolute;
         z-index: -2;
+        display: flex;
 
-        @media screen and (max-width: 1155px) {
+        @media screen and (max-width: 1230px) {
+            width: 550px;
+            margin-left: 635px;
+        }
+
+        @media screen and (max-width: 1205px) {
             margin-left: 600px;
         }
+
+        @media screen and (max-width: 1170px) {
+            width: 500px;
+        }
+
+        @media screen and (max-width: 1120px) {
+            margin-left: 580px;
+        }
+    
 
         @media screen and (max-width: 1070px) {
             left: 50%; 
@@ -2831,12 +2846,33 @@ main{
             border-top: 1px solid red;
         }
 
+        @media screen and (max-width: 524px) {
+            width: 495px;
+        }
+
+        @media screen and (max-width: 512px) {
+            width: 450px;
+        }
+
+        @media screen and (max-width: 460px) {
+            width: 400px;
+        }
+
+        @media screen and (max-width: 400px) {
+            width: 350px;
+        }
+
+        @media screen and (max-width: 366px) {
+            width: 300px;
+        }
+
         h1{
             position: absolute;
             color: #fff;
             top: 58%;
             left: 50%;
             transform: translate(-50%,-50%);
+            width: 250px;
 
             @media screen and (max-width: 380px) {
                 width: 330px;
